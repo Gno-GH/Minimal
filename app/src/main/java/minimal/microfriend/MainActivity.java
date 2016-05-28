@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 public class MainActivity extends FragmentActivity {
     private static final String FRONT_FT = "FRONT_FT";
     private static final String LEFT_FT = "LEFT_FT";
-
+    //git
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
