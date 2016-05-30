@@ -2,31 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <minimal.microfriend.view.NoScrollViewPager
         android:id="@+id/front_vp"
         android:layout_width="match_parent"
-        android:layout_weight="10"
-        android:layout_height="0dp">
-    </minimal.microfriend.view.NoScrollViewPager>
+        android:layout_height="0dp"
+        android:layout_weight="10"></minimal.microfriend.view.NoScrollViewPager>
+
     <RadioGroup
         android:id="@+id/front_rg"
-        android:background="@android:color/holo_blue_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
         android:orientation="horizontal">
-        <RadioButton 
+
+        <RadioButton
+            android:id="@+id/radio_mes"
+            style="@style/front_radio"
             android:text="消息"
-            android:textSize="40sp"
-            style="@style/front_radio"/>
-        <RadioButton 
+            android:textSize="40sp" />
+
+        <RadioButton
+            android:id="@+id/radio_center"
+            style="@style/front_radio"
             android:text="广场"
-            android:textSize="40sp"
-            style="@style/front_radio"/>
-        <RadioButton 
+            android:textSize="40sp" />
+
+        <RadioButton
+            android:id="@+id/radio_micro"
+            style="@style/front_radio"
             android:text="查找"
-            android:textSize="40sp"
-            style="@style/front_radio"/>
+            android:textSize="40sp" />
     </RadioGroup>
 </LinearLayout>
