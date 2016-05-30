@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <android.support.v4.view.ViewPager
+    <minimal.microfriend.view.NoScrollViewPager
         android:id="@+id/front_vp"
         android:layout_width="match_parent"
         android:layout_weight="10"
         android:layout_height="0dp">
-    </android.support.v4.view.ViewPager>
-    <RadioGroup 
+    </minimal.microfriend.view.NoScrollViewPager>
+    <RadioGroup
+        android:id="@+id/front_rg"
         android:background="@android:color/holo_blue_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,20 +1,44 @@
 package minimal.microfriend.fragment;
-import android.support.v4.view.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RadioGroup;
+
+import java.util.ArrayList;
+
 import minimal.microfriend.R;
+import minimal.microfriend.adapter.ContextPagerAdapter;
 import minimal.microfriend.base.BaseFragment;
-public class FrontFragment extends BaseFragment {
-	private ViewPager front_vp;
-	@Override
-	public View iniView(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.fragment_front, null);
-		front_vp = (ViewPager) view.findViewById(R.id.front_vp);
-		return view;
-	}
-	@Override
-	public void initData() {
+import minimal.microfriend.base.BaseTabPager;
+import minimal.microfriend.centerpager.CenterPager;
+import minimal.microfriend.centerpager.MessagePager;
+import minimal.microfriend.centerpager.MicroPager;
+import minimal.microfriend.view.NoScrollViewPager;
 
-	}
+public class FrontFragment extends BaseFragment implements View.OnClickListener{
+    private NoScrollViewPager front_vp;
+    private ArrayList<BaseTabPager> pagers;
+    private RadioGroup front_rg;
 
+    @Override
+    public View iniView(LayoutInflater inflater) {
+        View view = inflater.inflate(R.layout.fragment_front, null);
+        front_vp = (NoScrollViewPager) view.findViewById(R.id.front_vp);
+        front_rg = (RadioGroup) view.findViewById(R.id.front_rg);
+        return view;
+    }
+
+    @Override
+    public void initData() {
+        pagers = new ArrayList<BaseTabPager>();
+        pagers.add(new MessagePager(this.activity));
+        pagers.add(new CenterPager(this.activity));
+        pagers.add(new MicroPager(this.activity));
+        front_vp.setAdapter(new ContextPagerAdapter(pagers));
+        front_rg.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+    }
 }

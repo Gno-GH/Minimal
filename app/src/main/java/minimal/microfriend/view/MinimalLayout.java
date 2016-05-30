@@ -117,13 +117,13 @@ public class MinimalLayout extends FrameLayout {
 			super.onViewReleased(releasedChild, xvel, yvel);
 			if (xvel > 0 || (xvel == 0 && mleftdx > mleft / 3)) {
 				isOpen(mleft, true);
-				if (status != Status.Open) {
+				if (status != Status.Open&&dragListener!=null) {
 					dragListener.onOpen();
 					status = Status.Open;
 				}
 			} else {
 				isOpen(0, true);
-				if (status != Status.Close) {
+				if (status != Status.Close&&dragListener!=null) {
 					dragListener.onClose();
 					status = Status.Close;
 				}
@@ -174,7 +174,7 @@ public class MinimalLayout extends FrameLayout {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		return true;
+		return false;
 	}
 
 	@Override
