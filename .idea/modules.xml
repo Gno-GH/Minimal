@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MicroFriend.iml" filepath="$PROJECT_DIR$/MicroFriend.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/minimal.iml" filepath="$PROJECT_DIR$/minimal.iml" />
     </modules>
   </component>
 </project>
