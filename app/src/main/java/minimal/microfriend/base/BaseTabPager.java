@@ -3,6 +3,7 @@ package minimal.microfriend.base;
 import android.content.Context;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import minimal.microfriend.R;
 
@@ -11,8 +12,9 @@ import minimal.microfriend.R;
  */
 public class BaseTabPager {
     public Context context;
-    public FrameLayout frameLayout;
+    public LinearLayout linearLayout;
     private View rootView;
+    public boolean isaddview = true;
 
     public BaseTabPager(Context context) {
         this.context = context;
@@ -21,7 +23,7 @@ public class BaseTabPager {
 
     private View initView() {
         View view = View.inflate(this.context, R.layout.tab_basepager, null);
-        frameLayout = (FrameLayout) view.findViewById(R.id.tab_base_fl);
+        linearLayout = (LinearLayout) view.findViewById(R.id.tab_base_ll);
         return view;
     }
 

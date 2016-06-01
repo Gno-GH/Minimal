@@ -29,7 +29,6 @@ public class ContextPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         container.addView(pagers.get(position).getRootView());
-        pagers.get(position).initData();
         return pagers.get(position).getRootView();
     }
 

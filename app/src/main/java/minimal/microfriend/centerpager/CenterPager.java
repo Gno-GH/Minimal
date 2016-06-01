@@ -16,11 +16,5 @@ public class CenterPager extends BaseTabPager{
     }
     @Override
     public void initData(){
-        TextView tv = new TextView(this.context);
-        tv.setText("中心");
-        tv.setTextSize(25);
-        tv.setTextColor(Color.RED);
-        tv.setGravity(Gravity.CENTER);
-        frameLayout.addView(tv);
     }
 }

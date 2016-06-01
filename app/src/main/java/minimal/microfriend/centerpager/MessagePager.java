@@ -11,17 +11,21 @@ import minimal.microfriend.base.BaseTabPager;
  * Created by gno on 16-5-28.
  */
 public class MessagePager extends BaseTabPager{
+    private TextView tv;
     public MessagePager(Context context) {
         super(context);
     }
     @Override
     public void initData(){
-        TextView tv = new TextView(this.context);
-        tv.setText("消息");
-        tv.setTextSize(25);
-        tv.setTextColor(Color.RED);
-        tv.setGravity(Gravity.CENTER);
-        frameLayout.addView(tv);
+        if(isaddview) {
+            tv = new TextView(this.context);
+            tv.setText("消息");
+            tv.setTextSize(25);
+            tv.setTextColor(Color.RED);
+            tv.setGravity(Gravity.CENTER);
+            linearLayout.addView(tv);
+            isaddview = false;
+        }
     }
 
 }

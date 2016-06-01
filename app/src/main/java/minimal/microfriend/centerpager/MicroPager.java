@@ -16,12 +16,6 @@ public class MicroPager extends BaseTabPager {
     }
     @Override
     public void initData(){
-        TextView tv = new TextView(this.context);
-        tv.setText("查找");
-        tv.setTextSize(25);
-        tv.setTextColor(Color.RED);
-        tv.setGravity(Gravity.CENTER);
-        frameLayout.addView(tv);
     }
 }
 
