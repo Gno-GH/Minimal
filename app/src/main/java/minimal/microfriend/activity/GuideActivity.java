@@ -23,8 +23,8 @@ public class GuideActivity extends BaseActivity {
     private Button b_learn;
     private ArrayList<ImageView> views;
     private int last;
-//	private final int[] imageIds = { R.drawable.c310083_c,
-//			R.drawable.c310084_c, R.drawable.c310085_c, R.drawable.c310086_c };
+	private final int[] imageIds = { R.drawable.guide_1,
+			R.drawable.guide_2, R.drawable.guide_3, R.drawable.guide_4 };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,9 @@ public class GuideActivity extends BaseActivity {
     public void initData() {
         views = new ArrayList<ImageView>();
         ImageView imageView;
-//		for (int i = 0; i < imageIds.length; i++) {
-        for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < imageIds.length; i++) {
             imageView = new ImageView(this);
-//            imageView.setBackgroundResource(imageIds[i]);
+            imageView.setBackgroundResource(imageIds[i]);
             views.add(imageView);
         }
         vp_welcome.setAdapter(new WelcomePagerAdapter(views));

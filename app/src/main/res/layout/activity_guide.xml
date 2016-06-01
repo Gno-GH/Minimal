@@ -27,6 +27,7 @@
         android:layout_above="@id/layout_change"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
+        android:background="@drawable/start"
         android:visibility="gone"
         />
 
