@@ -10,10 +10,10 @@
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray">
     </FrameLayout>
-    <FrameLayout 
+    <minimal.microfriend.view.DragLinearLayout
         android:id="@+id/fl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/holo_orange_light">
-    </FrameLayout>
+    </minimal.microfriend.view.DragLinearLayout>
 </minimal.microfriend.view.MinimalLayout>

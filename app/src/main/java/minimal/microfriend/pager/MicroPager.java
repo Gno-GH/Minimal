@@ -1,9 +1,6 @@
-package minimal.microfriend.centerpager;
+package minimal.microfriend.pager;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
-import android.widget.TextView;
 
 import minimal.microfriend.base.BaseTabPager;
 

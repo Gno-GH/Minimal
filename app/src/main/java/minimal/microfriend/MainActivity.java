@@ -25,7 +25,15 @@ public class MainActivity extends FragmentActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fl_left, new LeftFragment(), LEFT_FT);
-        transaction.replace(R.id.fl_main, new FrontFragment(), FRONT_FT);
+        transaction.replace(R.id.fl_main, new FrontFragment(mini_layout), FRONT_FT);
         transaction.commit();
+    }
+    public FrontFragment getFrontFragment(){
+        FragmentManager manager = getSupportFragmentManager();
+        return (FrontFragment)manager.findFragmentByTag("FRONT_FT");
+    }
+    public LeftFragment getLeftFragment(){
+        FragmentManager manager = getSupportFragmentManager();
+        return (LeftFragment)manager.findFragmentByTag("LEFT_FT");
     }
 }

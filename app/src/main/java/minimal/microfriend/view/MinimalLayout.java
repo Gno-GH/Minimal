@@ -22,7 +22,9 @@ public class MinimalLayout extends FrameLayout {
     private int mleftdx;
     private OnDragListener dragListener;
     private Status status = Status.Close;
-
+    public Status getStatus(){
+        return status;
+    }
     public static enum Status {
         Open, Close, Draging;
     }

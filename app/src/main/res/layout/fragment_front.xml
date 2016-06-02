@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<minimal.microfriend.view.DragLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dl_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,7 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"></minimal.microfriend.view.NoScrollViewPager>
-
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#adadad"
+        ></View>
     <RadioGroup
         android:id="@+id/front_rg"
         android:layout_width="match_parent"
@@ -35,4 +40,4 @@
             android:text="查找"
             android:textSize="40sp" />
     </RadioGroup>
-</LinearLayout>
+</minimal.microfriend.view.DragLinearLayout>
