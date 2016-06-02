@@ -4,23 +4,32 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/title_rl"
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
-        <TextView
-            android:text="标题栏"
-            android:id="@+id/title_tv"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_alignParentBottom="true"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#adadad"
-            ></View>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:fitsSystemWindows="true"/>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/title_rlq"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp">-->
+        <!--<TextView-->
+            <!--android:text="标题栏"-->
+            <!--android:id="@+id/title_tv1"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<View-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#adadad"-->
+            <!--&gt;</View>-->
+    <!--</RelativeLayout>-->
     <LinearLayout
         android:id="@+id/tab_base_ll"
         android:orientation="vertical"
