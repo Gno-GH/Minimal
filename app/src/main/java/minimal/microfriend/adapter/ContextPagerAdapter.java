@@ -13,9 +13,11 @@ import minimal.microfriend.base.BaseTabPager;
  */
 public class ContextPagerAdapter extends PagerAdapter {
     private ArrayList<BaseTabPager> pagers;
-    public ContextPagerAdapter(ArrayList<BaseTabPager> pagers){
+
+    public ContextPagerAdapter(ArrayList<BaseTabPager> pagers) {
         this.pagers = pagers;
     }
+
     @Override
     public int getCount() {
         return pagers.size();

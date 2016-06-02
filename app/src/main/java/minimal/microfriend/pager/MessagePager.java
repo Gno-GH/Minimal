@@ -18,12 +18,7 @@ public class MessagePager extends BaseTabPager{
     @Override
     public void initData(){
         if(isaddview) {
-            tv = new TextView(this.context);
-            tv.setText("消息");
-            tv.setTextSize(25);
-            tv.setTextColor(Color.RED);
-            tv.setGravity(Gravity.CENTER);
-            linearLayout.addView(tv);
+
             isaddview = false;
         }
     }
