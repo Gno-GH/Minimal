@@ -8,4 +8,6 @@ public abstract class BaseActivity extends Activity {
 	public Intent intent;
 	public abstract void initView();
 	public void initData(){}
+
+
 }

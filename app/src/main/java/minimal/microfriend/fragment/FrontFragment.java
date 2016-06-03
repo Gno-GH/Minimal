@@ -1,5 +1,6 @@
 package minimal.microfriend.fragment;
 
+import android.annotation.SuppressLint;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import minimal.microfriend.view.DragLinearLayout;
 import minimal.microfriend.view.MinimalLayout;
 import minimal.microfriend.view.NoScrollViewPager;
 
+@SuppressLint("ValidFragment")
 public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener {
     private NoScrollViewPager front_vp;
     private ArrayList<BaseTabPager> pagers;

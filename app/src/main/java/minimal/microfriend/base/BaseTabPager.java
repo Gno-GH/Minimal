@@ -1,16 +1,18 @@
 package minimal.microfriend.base;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toolbar;
 
 import minimal.microfriend.R;
 
 /**
  * Created by gno on 16-5-28.
  */
-public class BaseTabPager {
+public class BaseTabPager  {
     public Context context;
     public LinearLayout linearLayout;
     private View rootView;
