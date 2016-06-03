@@ -9,7 +9,7 @@
         android:id="@+id/front_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"></minimal.microfriend.view.NoScrollViewPager>
+        android:layout_weight="10"/>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"

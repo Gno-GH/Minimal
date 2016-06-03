@@ -2,6 +2,7 @@ package minimal.microfriend;
 
 import minimal.microfriend.fragment.FrontFragment;
 import minimal.microfriend.fragment.LeftFragment;
+import minimal.microfriend.utils.StatusBarCompat;
 import minimal.microfriend.view.MinimalLayout;
 
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      //  StatusBarCompat.compat(this, getResources().getColor(R.color.colorAccent));
         mini_layout = (MinimalLayout) findViewById(R.id.mini_layout);
         initFragment();
     }
