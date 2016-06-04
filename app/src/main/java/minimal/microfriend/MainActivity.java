@@ -1,9 +1,9 @@
 package minimal.microfriend;
 
+import cn.bmob.v3.Bmob;
 import minimal.microfriend.fragment.FrontFragment;
 import minimal.microfriend.fragment.LeftFragment;
 import minimal.microfriend.view.MinimalLayout;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -13,10 +13,12 @@ public class MainActivity extends FragmentActivity {
     private static final String FRONT_FT = "FRONT_FT";
     private static final String LEFT_FT = "LEFT_FT";
     private MinimalLayout mini_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bmob.initialize(MainActivity.this,"1fd27bc83141c867dc42b8f5b1d91c1e");
         mini_layout = (MinimalLayout) findViewById(R.id.mini_layout);
         initFragment();
     }
@@ -28,12 +30,14 @@ public class MainActivity extends FragmentActivity {
         transaction.replace(R.id.fl_main, new FrontFragment(mini_layout), FRONT_FT);
         transaction.commit();
     }
-    public FrontFragment getFrontFragment(){
+
+    public FrontFragment getFrontFragment() {
         FragmentManager manager = getSupportFragmentManager();
-        return (FrontFragment)manager.findFragmentByTag("FRONT_FT");
+        return (FrontFragment) manager.findFragmentByTag("FRONT_FT");
     }
-    public LeftFragment getLeftFragment(){
+
+    public LeftFragment getLeftFragment() {
         FragmentManager manager = getSupportFragmentManager();
-        return (LeftFragment)manager.findFragmentByTag("LEFT_FT");
+        return (LeftFragment) manager.findFragmentByTag("LEFT_FT");
     }
 }

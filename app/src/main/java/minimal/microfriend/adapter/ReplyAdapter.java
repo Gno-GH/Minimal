@@ -45,9 +45,9 @@ public class ReplyAdapter extends BaseAdapter {
 			convertView.setTag(holder);
 		}
 		else holder = (ViewHolder) convertView.getTag();
-		holder.observer.setText(replies.get(position).getObserver().getName());
-		holder.responder.setText(replies.get(position).getResponder().getName());
-		holder.word.setText(replies.get(position).getWord());
+		holder.observer.setText(replies.get(position).getObserver().getUsername());
+		holder.responder.setText(replies.get(position).getReceiver().getUsername());
+		holder.word.setText(replies.get(position).getReplycontent());
 		return convertView;
 	}
 	class ViewHolder{

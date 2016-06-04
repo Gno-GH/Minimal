@@ -1,32 +1,35 @@
 package minimal.microfriend.pager;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 import minimal.microfriend.adapter.TrendsAdapter;
 import minimal.microfriend.base.BaseTabPager;
-import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
-import minimal.microfriend.entry.User;
 
 /**
  * Created by gno on 16-5-28.
  */
-public class CenterPager extends BaseTabPager{
+public class CenterPager extends BaseTabPager {
     private ListView trend_lv;
     private ArrayList<Trend> trends;
+
     public CenterPager(Context context) {
         super(context);
     }
+
     @Override
-    public void initData(){
+    public void initData() {
         initTrends();
-        if(isaddview){
+        if (isaddview) {
             trend_lv = new ListView(context);
-            trend_lv.setAdapter(new TrendsAdapter(this.context,trends));
+            trend_lv.setAdapter(new TrendsAdapter(this.context, trends));
 //            trend_lv.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影
             trend_lv.setVerticalScrollBarEnabled(false);//隐藏滚动条
             linearLayout.addView(trend_lv);
@@ -35,16 +38,20 @@ public class CenterPager extends BaseTabPager{
 
     private void initTrends() {
         trends = new ArrayList<Trend>();
-        for (int i = 0; i < 5; i++) {
-            ArrayList<Reply> replies = new ArrayList<Reply>();
-            for (int j = 0; j < 5; j++) {
-                User observer = new User(j + 10000, "tutu " + j);
-                User responder = new User(j + 5220, " utut :" + j);
-                Reply reply = new Reply(observer, responder, "你好啊！Hellow!");
-                replies.add(reply);
+        BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
+        queryTrend.order("-updatedAt");
+        queryTrend.setLimit(10);
+        queryTrend.setSkip(0);
+        queryTrend.findObjects(this.context, new FindListener<Trend>() {
+            @Override
+            public void onSuccess(List<Trend> list) {
+                trends = (ArrayList<Trend>) list;
+//                Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show();
             }
-            Trend trend = new Trend("这是内容文本", "", replies);
-            trends.add(trend);
-        }
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
     }
 }

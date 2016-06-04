@@ -1,10 +1,13 @@
 package minimal.microfriend.fragment;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,16 +22,19 @@ import minimal.microfriend.view.DragLinearLayout;
 import minimal.microfriend.view.MinimalLayout;
 import minimal.microfriend.view.NoScrollViewPager;
 
-public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener {
+public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener, View.OnLongClickListener {
     private NoScrollViewPager front_vp;
     private ArrayList<BaseTabPager> pagers;
     private RadioGroup front_rg;
     private MinimalLayout minimalLayout;
     private DragLinearLayout dragLinearLayout;
-    public FrontFragment(MinimalLayout minimalLayout){
+    private RadioButton radio_center;
+
+    public FrontFragment(MinimalLayout minimalLayout) {
         super();
         this.minimalLayout = minimalLayout;
     }
+
     @Override
     public View iniView(LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.fragment_front, null);
@@ -36,6 +42,8 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
         front_rg = (RadioGroup) view.findViewById(R.id.front_rg);
         dragLinearLayout = (DragLinearLayout) view.findViewById(R.id.dl_layout);
         dragLinearLayout.setDragLayout(minimalLayout);
+        radio_center = (RadioButton) view.findViewById(R.id.radio_center);
+        radio_center.setOnLongClickListener(this);
         return view;
     }
 
@@ -66,5 +74,19 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
         }
         front_vp.setCurrentItem(index, false);
         pagers.get(index).initData();
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()) {
+            case R.id.radio_center:
+                if (radio_center.isChecked()) {
+//                    Intent intent = new Intent(this.activity,minimal.microfriend.activity.DialogActivity.class);
+                    Toast.makeText(this.activity, "弹出窗口", Toast.LENGTH_LONG).show();
+//                    startActivity(intent);
+                }
+                break;
+        }
+        return true;
     }
 }

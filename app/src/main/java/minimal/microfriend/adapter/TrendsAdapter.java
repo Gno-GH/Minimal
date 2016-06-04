@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import minimal.microfriend.R;
+import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
 import minimal.microfriend.view.AutoListView;
 
@@ -45,11 +46,11 @@ public class TrendsAdapter extends BaseAdapter {
             convertView = View.inflate(this.context, R.layout.center_listview_item, null);
             holder = new ViewHolder();
             findViewId(position, convertView, holder);
-            holder.context_lv.setAdapter(new ReplyAdapter(this.context, trends.get(position).getReplies()));
+            holder.context_lv.setAdapter(new ReplyAdapter(this.context, (ArrayList<Reply>) trends.get(position).getReplies()));
             convertView.setTag(holder);
         }
         else holder = (ViewHolder) convertView.getTag();
-        holder.context_text.setText(trends.get(position).getContext_text());
+        holder.context_text.setText(trends.get(position).getContentText());
 //		holder.context_image.set
         return convertView;
     }
