@@ -9,15 +9,6 @@ import cn.bmob.v3.BmobObject;
  */
 public class School extends BmobObject {
     private String sname;//学校名称
-    private List departs;//系院
-
-    public List getDeparts() {
-        return departs;
-    }
-
-    public void setDeparts(List departs) {
-        this.departs = departs;
-    }
 
     public String getSname() {
         return sname;

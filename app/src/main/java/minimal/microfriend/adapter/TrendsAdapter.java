@@ -1,6 +1,11 @@
 package minimal.microfriend.adapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
 import android.view.View;
@@ -18,10 +23,15 @@ import minimal.microfriend.view.AutoListView;
 public class TrendsAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Trend> trends;
+    private HashMap<Trend, ArrayList<Reply>> allreplies;
 
-    public TrendsAdapter(Context context, ArrayList<Trend> trends) {
+    public TrendsAdapter(Context context, HashMap<Trend, ArrayList<Reply>> allreplies) {
         this.context = context;
-        this.trends = trends;
+        this.allreplies = allreplies;
+        List t = Arrays.asList(allreplies.keySet().toArray());
+        for (Object o:t) {
+            trends.add((Trend) o);
+        }
     }
 
     @Override
@@ -46,10 +56,9 @@ public class TrendsAdapter extends BaseAdapter {
             convertView = View.inflate(this.context, R.layout.center_listview_item, null);
             holder = new ViewHolder();
             findViewId(position, convertView, holder);
-            holder.context_lv.setAdapter(new ReplyAdapter(this.context, (ArrayList<Reply>) trends.get(position).getReplies()));
+            holder.context_lv.setAdapter(new ReplyAdapter(this.context, allreplies.get(trends.get(position))));
             convertView.setTag(holder);
-        }
-        else holder = (ViewHolder) convertView.getTag();
+        } else holder = (ViewHolder) convertView.getTag();
         holder.context_text.setText(trends.get(position).getContentText());
 //		holder.context_image.set
         return convertView;
@@ -57,6 +66,7 @@ public class TrendsAdapter extends BaseAdapter {
 
     /**
      * 查找子控件
+     *
      * @param position
      * @param convertView
      * @param holder

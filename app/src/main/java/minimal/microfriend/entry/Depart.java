@@ -9,14 +9,14 @@ import cn.bmob.v3.BmobObject;
  */
 public class Depart extends BmobObject {
     private String dname;//系院名称
-    private List majors;//专业
+    private School school;//依赖的学校
 
-    public List getMajors() {
-        return majors;
+    public School getSchool() {
+        return school;
     }
 
-    public void setMajors(List majors) {
-        this.majors = majors;
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public String getDname() {

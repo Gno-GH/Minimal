@@ -16,6 +16,15 @@ public class User extends BmobUser {
     private Major major;//主修
     private Integer grade;//年级
     private BmobFile userphoto;//用户头像
+    private UserID userid;//用户学号
+
+    public UserID getUserid() {
+        return userid;
+    }
+
+    public void setUserid(UserID userid) {
+        this.userid = userid;
+    }
 
     public String getPetname() {
         return petname;

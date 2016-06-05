@@ -13,7 +13,6 @@ public class Trend extends BmobObject {
     private User createUser;//创建者
     private String contentText;//文本内容
     private List contentImgs;//图片路径集合
-    private List replies;//评论集合
     private Integer like;//喜欢
     private Integer dislike;//讨厌
 
@@ -39,14 +38,6 @@ public class Trend extends BmobObject {
 
     public void setContentImgs(List contentImgs) {
         this.contentImgs = contentImgs;
-    }
-
-    public List getReplies() {
-        return replies;
-    }
-
-    public void setReplies(List replies) {
-        this.replies = replies;
     }
 
     public Integer getLike() {

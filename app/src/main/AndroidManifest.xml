@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".activity.GuideActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
         <!--
         <activity
             android:name=".activity.DialogActivity"

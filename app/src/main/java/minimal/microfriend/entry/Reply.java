@@ -8,10 +8,19 @@ import cn.bmob.v3.BmobObject;
  * 回复类
  */
 public class Reply extends BmobObject {
+    private Trend trend;//依赖的动态
     private User observer;// 评论者
     private User receiver;// 回复者
     private String replycontent;// 回复内容
     private boolean isfrist;//是否为主评论
+
+    public Trend getTrend() {
+        return trend;
+    }
+
+    public void setTrend(Trend trend) {
+        this.trend = trend;
+    }
 
     public User getObserver() {
         return observer;
