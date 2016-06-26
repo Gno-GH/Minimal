@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/e"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/rg_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:layout_marginRight="20dp"
+            android:id="@+id/rb_boy"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_boy"
+            android:button="@null" />
+        <RadioButton
+            android:id="@+id/rb_girl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_girl"
+            android:button="@null" />
+    </RadioGroup>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/editview_login"
+        android:drawablePadding="5dp"
+        android:hint="学  号"
+        android:inputType="number"
+        android:maxLength="13"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="#333"
+        android:textColorHint="#aaa"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/editview_login"
+        android:drawablePadding="5dp"
+        android:hint="密 码"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="#333"
+        android:textColorHint="#aaa"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/b_logon_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_login"
+        android:text="下一步"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="15sp" />
+</LinearLayout>

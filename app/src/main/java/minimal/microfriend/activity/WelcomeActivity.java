@@ -28,6 +28,9 @@ public class WelcomeActivity extends BaseActivity {
 		if (!SharePrefences.getBoolean(this, GUIDE))
 			intent = new Intent(WelcomeActivity.this,
 					minimal.microfriend.activity.GuideActivity.class);
+		else if(!SharePrefences.getBoolean(this, LOGINED))
+			intent = new Intent(WelcomeActivity.this,
+					minimal.microfriend.activity.LoginActivity.class);
 		else
 			intent = new Intent(WelcomeActivity.this,
 					minimal.microfriend.MainActivity.class);

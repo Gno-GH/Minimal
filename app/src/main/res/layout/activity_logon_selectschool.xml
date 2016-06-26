@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/logon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/e"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/listview_search"
+        android:drawableRight="@drawable/school_search"
+        android:hint="学校名称"
+        android:imeOptions="actionSearch"
+        android:paddingLeft="37px"
+        android:paddingRight="13px"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColorHint="#999"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_depart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/logon_listview_bg"
+        android:paddingBottom="5px"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="5px"
+        android:visibility="gone">
+
+        <ListView
+            android:id="@+id/lv_depart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"></ListView>
+    </RelativeLayout>
+</LinearLayout>

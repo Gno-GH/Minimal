@@ -5,6 +5,7 @@ import android.content.Intent;
 
 public abstract class BaseActivity extends Activity {
 	public static final String GUIDE = "guide";
+	public static final String LOGINED = "logined";
 	public Intent intent;
 	public abstract void initView();
 	public void initData(){}

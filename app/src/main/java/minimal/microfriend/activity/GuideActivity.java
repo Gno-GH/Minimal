@@ -82,7 +82,7 @@ public class GuideActivity extends BaseActivity {
             public void onPageScrollStateChanged(int arg0) {
             }
         });
-        intent = new Intent(GuideActivity.this, minimal.microfriend.MainActivity.class);
+        intent = new Intent(GuideActivity.this, minimal.microfriend.activity.LoginActivity.class);
     }
 
     public void learn(View view) {
