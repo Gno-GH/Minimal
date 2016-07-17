@@ -1,12 +1,5 @@
 package minimal.microfriend.activity;
 
-import java.util.ArrayList;
-
-import minimal.microfriend.R;
-import minimal.microfriend.adapter.WelcomePagerAdapter;
-import minimal.microfriend.base.BaseActivity;
-import minimal.microfriend.utils.SharePrefences;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -16,6 +9,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+
+import minimal.microfriend.R;
+import minimal.microfriend.adapter.WelcomePagerAdapter;
+import minimal.microfriend.base.BaseActivity;
+import minimal.microfriend.utils.SharePrefences;
 
 public class GuideActivity extends BaseActivity {
     private ViewPager vp_welcome;
