@@ -1,13 +1,14 @@
 package minimal.microfriend.entry;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 用户类
  */
-public class User extends BmobUser {
-    private String petname;//昵称
+public class User extends BmobUser implements Serializable{
     private String about;//自我简介
     private String sex;//性别
     private Integer age;//年龄
@@ -16,14 +17,15 @@ public class User extends BmobUser {
     private Major major;//主修
     private Integer grade;//年级
     private BmobFile userphoto;//用户头像
-    private UserID userid;//用户学号
+    private String petname;//用户昵称
+    private String brith;//用户生日
 
-    public UserID getUserid() {
-        return userid;
+    public String getBrith() {
+        return brith;
     }
 
-    public void setUserid(UserID userid) {
-        this.userid = userid;
+    public void setBrith(String brith) {
+        this.brith = brith;
     }
 
     public String getPetname() {

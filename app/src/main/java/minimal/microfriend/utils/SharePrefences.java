@@ -21,6 +21,19 @@ public class SharePrefences {
 		boolean value = preferences.getBoolean(key, false);
 		return value;
 	}
+	/**
+	 * 从cofing中获取一个字符串默认为null
+	 *
+	 * @param context
+	 * @param key
+	 * @return
+	 */
+	public static String getString(Context context, String key) {
+		preferences = context
+				.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+		String value = preferences.getString(key, "null");
+		return value;
+	}
 
 	/**
 	 * 写入一个布尔值到config
@@ -34,6 +47,20 @@ public class SharePrefences {
 				.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
 		Editor editor = preferences.edit();
 		editor.putBoolean(key, value);
+		editor.commit();
+	}
+
+	/**
+	 * 写入一个字符串到config
+	 * @param context
+	 * @param key
+	 * @param value
+     */
+	public  static void setString(Context context, String key, String value) {
+		preferences = context
+				.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString(key,value);
 		editor.commit();
 	}
 }

@@ -8,6 +8,15 @@ import cn.bmob.v3.BmobObject;
 public class UserID extends BmobObject{
     private String userid;
     private School school;
+    private String bool ;
+
+    public String getBool() {
+        return bool;
+    }
+
+    public void setBool(String bool) {
+        this.bool = bool;
+    }
 
     public String getUserid() {
         return userid;

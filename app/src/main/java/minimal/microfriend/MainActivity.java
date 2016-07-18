@@ -1,24 +1,27 @@
 package minimal.microfriend;
 
-import cn.bmob.v3.Bmob;
-import minimal.microfriend.fragment.FrontFragment;
-import minimal.microfriend.fragment.LeftFragment;
-import minimal.microfriend.view.MinimalLayout;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import minimal.microfriend.entry.User;
+import minimal.microfriend.fragment.FrontFragment;
+import minimal.microfriend.fragment.LeftFragment;
+import minimal.microfriend.utils.MicroTools;
+import minimal.microfriend.view.MinimalLayout;
+
 public class MainActivity extends FragmentActivity {
     private static final String FRONT_FT = "FRONT_FT";
     private static final String LEFT_FT = "LEFT_FT";
     private MinimalLayout mini_layout;
-
+    public User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Bmob.initialize(MainActivity.this,"1fd27bc83141c867dc42b8f5b1d91c1e");
+        user = (User) getIntent().getSerializableExtra("user");
+        MicroTools.toast(MainActivity.this,"登录成功");
         mini_layout = (MinimalLayout) findViewById(R.id.mini_layout);
         initFragment();
     }

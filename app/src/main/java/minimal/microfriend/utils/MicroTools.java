@@ -1,11 +1,15 @@
 package minimal.microfriend.utils;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.security.MessageDigest;
 
 /**
  * Created by gno on 16/7/17.
  */
 public class MicroTools {
+    private static Toast mtoast;
     /**
      * Character string encryption
      * @param before
@@ -28,5 +32,12 @@ public class MicroTools {
             e.printStackTrace();
         }
         return after;
+    }
+    public static void toast(Context context ,String str ) {
+        if(mtoast == null)
+        mtoast = Toast.makeText(context,str,Toast.LENGTH_SHORT);
+        mtoast.setDuration(Toast.LENGTH_SHORT);
+        mtoast.setText(str);
+        mtoast.show();
     }
 }
