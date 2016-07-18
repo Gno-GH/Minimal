@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import minimal.microfriend.R;
@@ -52,6 +53,7 @@ public class SelectSchoolActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logon_selectschool);
+        Bmob.initialize(SelectSchoolActivity.this,"1fd27bc83141c867dc42b8f5b1d91c1e");
         initView();
         initData();
         initPopUpWindow();
@@ -130,16 +132,17 @@ public class SelectSchoolActivity extends BaseActivity{
                             }
                             lv_major.setAdapter(mMajorAdapter);
                             mMajorAdapter.notifyDataSetChanged();
+                            mojarWindow.showAtLocation(logon, Gravity.CENTER, 0, 0);
                             lv_major.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     getUser().setMajor(majors.get(i));
                                     intent = new Intent(SelectSchoolActivity.this,minimal.microfriend.activity.LogonActivity.class);
                                     SelectSchoolActivity.this.startActivity(intent);
+                                    mojarWindow.dismiss();
                                     SelectSchoolActivity.this.finish();
                                 }
                             });
-                            mojarWindow.showAtLocation(logon, Gravity.CENTER, 0, 0);
                         }
                     }
 
