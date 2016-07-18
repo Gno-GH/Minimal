@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity {
         tv_logon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(LoginActivity.this,minimal.microfriend.activity.LogonActivity.class);
+                intent = new Intent(LoginActivity.this,minimal.microfriend.activity.SelectSchoolActivity.class);
                 startActivity(intent);
             }
         });
