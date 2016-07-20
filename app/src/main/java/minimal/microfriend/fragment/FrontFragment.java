@@ -1,13 +1,10 @@
 package minimal.microfriend.fragment;
 
-import android.content.Intent;
-import android.nfc.Tag;
-import android.util.Log;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,13 +12,16 @@ import minimal.microfriend.R;
 import minimal.microfriend.adapter.ContextPagerAdapter;
 import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.base.BaseTabPager;
+import minimal.microfriend.entry.User;
 import minimal.microfriend.pager.CenterPager;
 import minimal.microfriend.pager.MessagePager;
 import minimal.microfriend.pager.MicroPager;
+import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.DragLinearLayout;
 import minimal.microfriend.view.MinimalLayout;
 import minimal.microfriend.view.NoScrollViewPager;
 
+@SuppressLint("ValidFragment")
 public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener, View.OnLongClickListener {
     private NoScrollViewPager front_vp;
     private ArrayList<BaseTabPager> pagers;
@@ -50,12 +50,20 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
     @Override
     public void initData() {
         pagers = new ArrayList<BaseTabPager>();
-        pagers.add(new MessagePager(this.activity));
-        pagers.add(new CenterPager(this.activity));
-        pagers.add(new MicroPager(this.activity));
+        pagers.add(new MessagePager(this.activity,user));
+        pagers.add(new CenterPager(this.activity,user));
+        pagers.add(new MicroPager(this.activity,user));
         pagers.get(0).initData();
         front_vp.setAdapter(new ContextPagerAdapter(pagers));
         front_rg.setOnCheckedChangeListener(this);
+    }
+
+    @Override
+    public User initUser() {
+        if(getArguments()!=null) {
+            return (User) getArguments().getSerializable("user");
+        }
+        else  return new User();
     }
 
     @Override
@@ -82,7 +90,7 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
             case R.id.radio_center:
                 if (radio_center.isChecked()) {
 //                    Intent intent = new Intent(this.activity,minimal.microfriend.activity.DialogActivity.class);
-                    Toast.makeText(this.activity, "弹出窗口", Toast.LENGTH_LONG).show();
+                    MicroTools.toast(this.activity,"弹出窗口");
 //                    startActivity(intent);
                 }
                 break;

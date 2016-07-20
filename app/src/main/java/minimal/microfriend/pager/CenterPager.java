@@ -1,8 +1,8 @@
 package minimal.microfriend.pager;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +10,11 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-import minimal.microfriend.adapter.TrendsAdapter;
 import minimal.microfriend.base.BaseTabPager;
 import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
+import minimal.microfriend.entry.User;
+import minimal.microfriend.utils.MicroTools;
 
 /**
  * Created by gno on 16-5-28.
@@ -22,12 +23,14 @@ public class CenterPager extends BaseTabPager {
     private ListView trend_lv;
     private HashMap<Trend, ArrayList<Reply>> allreplies;
     private ArrayList<Reply> replies;
-    public CenterPager(Context context) {
+    public CenterPager(Context context, User user) {
         super(context);
+        this.user = user;
     }
 
     @Override
     public void initData() {
+        Log.d("ABC",user.getPetname());
         initTrends();
 //        if (isaddview) {
 //            trend_lv = new ListView(context);
@@ -48,7 +51,6 @@ public class CenterPager extends BaseTabPager {
         queryTrend.findObjects(this.context, new FindListener<Trend>() {
             @Override
             public void onSuccess(List<Trend> list) {
-                Toast.makeText(context,"查询成功"+list.get(0).getCreateUser().getUsername(),Toast.LENGTH_SHORT).show();
                 for (Trend t : list){
                     replies = new ArrayList<Reply>();
                     BmobQuery<Reply> queryReply = new BmobQuery<Reply>();
@@ -60,11 +62,11 @@ public class CenterPager extends BaseTabPager {
                         @Override
                         public void onSuccess(List<Reply> list) {
                             replies = (ArrayList<Reply>) list;
-                            Toast.makeText(context,"查询成功"+list.size(),Toast.LENGTH_SHORT).show();
+                            MicroTools.toast(context,"查询成功");
                         }
                         @Override
                         public void onError(int i, String s) {
-                            Toast.makeText(context,"查询失败2",Toast.LENGTH_SHORT).show();
+                            MicroTools.toast(context,"查询失败"+i);
                         }
                     });
                     allreplies.put(t,replies);
@@ -72,7 +74,7 @@ public class CenterPager extends BaseTabPager {
             }
             @Override
             public void onError(int i, String s) {
-                Toast.makeText(context,"查询失败",Toast.LENGTH_SHORT).show();
+                MicroTools.toast(context,"查询失败"+i);
             }
         });
     }

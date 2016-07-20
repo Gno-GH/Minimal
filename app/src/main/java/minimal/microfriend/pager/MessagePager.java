@@ -6,14 +6,16 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import minimal.microfriend.base.BaseTabPager;
+import minimal.microfriend.entry.User;
 
 /**
  * Created by gno on 16-5-28.
  */
 public class MessagePager extends BaseTabPager{
     private TextView tv;
-    public MessagePager(Context context) {
+    public MessagePager(Context context, User user) {
         super(context);
+        this.user = user;
     }
     @Override
     public void initData(){

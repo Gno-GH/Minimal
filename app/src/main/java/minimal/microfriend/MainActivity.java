@@ -12,10 +12,11 @@ import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.MinimalLayout;
 
 public class MainActivity extends FragmentActivity {
-    private static final String FRONT_FT = "FRONT_FT";
-    private static final String LEFT_FT = "LEFT_FT";
+
     private MinimalLayout mini_layout;
     public User user;
+    private LeftFragment mleft;
+    private FrontFragment mfront;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,20 +28,24 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initFragment() {
+        mfront = new FrontFragment(mini_layout);
+        mleft = new LeftFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user",user);
+        mleft.setArguments(bundle);
+        mfront.setArguments(bundle);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fl_left, new LeftFragment(), LEFT_FT);
-        transaction.replace(R.id.fl_main, new FrontFragment(mini_layout), FRONT_FT);
+        transaction.replace(R.id.fl_left,mleft);
+        transaction.replace(R.id.fl_main, mfront);
         transaction.commit();
     }
 
     public FrontFragment getFrontFragment() {
-        FragmentManager manager = getSupportFragmentManager();
-        return (FrontFragment) manager.findFragmentByTag("FRONT_FT");
+        return mfront;
     }
 
     public LeftFragment getLeftFragment() {
-        FragmentManager manager = getSupportFragmentManager();
-        return (LeftFragment) manager.findFragmentByTag("LEFT_FT");
+        return mleft;
     }
 }
