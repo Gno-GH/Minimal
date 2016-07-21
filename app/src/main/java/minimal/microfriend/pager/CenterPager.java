@@ -28,6 +28,7 @@ public class CenterPager extends BaseTabPager {
     private TrendsAdapter madapter;
     private int index = 0;
     private int postion = 0;
+    private int startX = 0;
     public CenterPager(Context context, User user) {
         super(context);
         this.user = user;
@@ -37,6 +38,7 @@ public class CenterPager extends BaseTabPager {
     public void initData() {
         if (allreplies == null) {
             trend_rlv = new RefrenshListView(context);
+            trend_rlv.setDividerHeight(0);
             trend_rlv.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影
             trend_rlv.setVerticalScrollBarEnabled(false);//隐藏滚动条
             initTrends();
@@ -62,6 +64,7 @@ public class CenterPager extends BaseTabPager {
                     BmobQuery<Reply> queryReply = new BmobQuery<Reply>();
                     queryReply.include("trend");
                     queryReply.include("receiver,observer");
+                    queryReply.order("-createdAt");
                     queryReply.addWhereEqualTo("trend", list.get(i));
                     queryReply.findObjects(context, new FindListener<Reply>() {
                         @Override
@@ -70,9 +73,10 @@ public class CenterPager extends BaseTabPager {
                             replies = (ArrayList<Reply>) list;
                             allreplies.put(mTrends.get(postion), replies);
                             if( postion== index){
-                                madapter = new TrendsAdapter(context, allreplies);
+                                madapter = new TrendsAdapter(context, allreplies,user,ll_root);
                                 trend_rlv.setAdapter(madapter);
                                 linearLayout.addView(trend_rlv);
+                                madapter.notifyDataSetChanged();
                                 postion = 0;
                             }
                             postion++;

@@ -13,6 +13,7 @@ import minimal.microfriend.entry.User;
 public class BaseTabPager {
     public Context context;
     public LinearLayout linearLayout;
+    public LinearLayout ll_root;
     private View rootView;
     public User user;
     public boolean isaddview = true;
@@ -25,6 +26,7 @@ public class BaseTabPager {
     private View initView() {
         View view = View.inflate(this.context, R.layout.tab_basepager, null);
         linearLayout = (LinearLayout) view.findViewById(R.id.tab_base_ll);
+        ll_root = (LinearLayout) view.findViewById(R.id.ll_root);
         return view;
     }
 
@@ -32,7 +34,5 @@ public class BaseTabPager {
         return rootView;
     }
 
-    public void initData() {
-
-    }
+    public void initData() {}
 }

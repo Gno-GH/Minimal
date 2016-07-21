@@ -1,12 +1,15 @@
 package minimal.microfriend.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,16 +20,23 @@ import java.util.List;
 import minimal.microfriend.R;
 import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
+import minimal.microfriend.entry.User;
+import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.AutoListView;
 
-public class TrendsAdapter extends BaseAdapter {
+public class TrendsAdapter extends BaseAdapter{
     private Context context;
     private ArrayList<Trend> trends;
     private HashMap<Trend, ArrayList<Reply>> allreplies;
-
-    public TrendsAdapter(Context context, HashMap<Trend, ArrayList<Reply>> allreplies) {
+    private User user;
+    private PopupWindow mComment;
+    private View popView;
+    private LinearLayout ll_pop;
+    public TrendsAdapter(Context context, HashMap<Trend, ArrayList<Reply>> allreplies,User user,LinearLayout ll_pop) {
         this.context = context;
         this.allreplies = allreplies;
+        this.user = user;
+        this.ll_pop = ll_pop;
         trends = new ArrayList<Trend>();
         List t = Arrays.asList(allreplies.keySet().toArray());
         for (Object o:t) {
@@ -57,14 +67,50 @@ public class TrendsAdapter extends BaseAdapter {
             convertView = View.inflate(this.context, R.layout.center_listview_item, null);
             holder = new ViewHolder();
             findViewId(position, convertView, holder);
+            childOnClick(holder,position);
             holder.context_lv.setAdapter(new ReplyAdapter(this.context, allreplies.get(trends.get(position))));
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
+        if(!trends.get(position).getCreateUser().getObjectId().equals(user.getObjectId()))
+            holder.del_ib.setVisibility(View.INVISIBLE);
         holder.context_text.setText(trends.get(position).getContentText());
         holder.create_time.setText(trends.get(position).getCreatedAt().toString());
         holder.user_name.setText(trends.get(position).getCreateUser().getPetname());
 //		holder.context_image.set
         return convertView;
+    }
+
+    private void childOnClick(ViewHolder holder,int position) {
+        holder.del_ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MicroTools.toast(context,"删除");
+            }
+        });
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popView = View.inflate(context,R.layout.pop_comment,null);
+                mComment = new PopupWindow(popView,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                mComment.setBackgroundDrawable(new BitmapDrawable());
+                mComment.setOutsideTouchable(true);
+                mComment.showAtLocation(ll_pop, Gravity.CENTER, 0, 0);
+                MicroTools.toast(context,"回复");
+            }
+        });
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MicroTools.toast(context,"喜欢");
+            }
+        });
+        holder.dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MicroTools.toast(context,"讨厌");
+            }
+        });
     }
 
     /**
