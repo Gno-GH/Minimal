@@ -1,12 +1,12 @@
 package minimal.microfriend.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import minimal.microfriend.R;
 import minimal.microfriend.entry.Reply;
@@ -45,8 +45,8 @@ public class ReplyAdapter extends BaseAdapter {
 			convertView.setTag(holder);
 		}
 		else holder = (ViewHolder) convertView.getTag();
-		holder.observer.setText(replies.get(position).getObserver().getUsername());
-		holder.responder.setText(replies.get(position).getReceiver().getUsername());
+		holder.observer.setText(replies.get(position).getObserver().getPetname());
+		holder.responder.setText(replies.get(position).getReceiver().getPetname());
 		holder.word.setText(replies.get(position).getReplycontent());
 		return convertView;
 	}

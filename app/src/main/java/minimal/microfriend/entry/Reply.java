@@ -1,7 +1,5 @@
 package minimal.microfriend.entry;
 
-import java.util.Date;
-
 import cn.bmob.v3.BmobObject;
 
 /**

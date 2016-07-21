@@ -1,19 +1,18 @@
 package minimal.microfriend.adapter;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import minimal.microfriend.R;
 import minimal.microfriend.entry.Reply;
@@ -28,10 +27,12 @@ public class TrendsAdapter extends BaseAdapter {
     public TrendsAdapter(Context context, HashMap<Trend, ArrayList<Reply>> allreplies) {
         this.context = context;
         this.allreplies = allreplies;
+        trends = new ArrayList<Trend>();
         List t = Arrays.asList(allreplies.keySet().toArray());
         for (Object o:t) {
             trends.add((Trend) o);
         }
+
     }
 
     @Override
@@ -60,6 +61,8 @@ public class TrendsAdapter extends BaseAdapter {
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
         holder.context_text.setText(trends.get(position).getContentText());
+        holder.create_time.setText(trends.get(position).getCreatedAt().toString());
+        holder.user_name.setText(trends.get(position).getCreateUser().getPetname());
 //		holder.context_image.set
         return convertView;
     }

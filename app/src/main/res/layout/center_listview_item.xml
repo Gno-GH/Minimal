@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,72 +13,102 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/headimage" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/headimage"/>
 
         <TextView
             android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/head_iv"
             android:text="用户名"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="@android:color/black"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/create_time"
-            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
+            android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/head_iv"
             android:text="发布时间"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="@android:color/black"
+            android:textSize="10sp"/>
 
         <ImageButton
             android:id="@+id/del_ib"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp" />
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/del"/>
     </RelativeLayout>
 
     <TextView
         android:id="@+id/context_text"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="11sp"/>
 
     <ImageView
         android:id="@+id/context_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="7dp"
+        android:background="@android:color/darker_gray"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="20dp">
+        android:layout_height="27dp"
+        android:padding="0dp">
 
         <ImageButton
             android:id="@+id/comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/answer"/>
 
         <ImageButton
             android:id="@+id/dislike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/comment" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/comment"
+            android:background="@drawable/dislike"/>
 
         <ImageButton
             android:id="@+id/like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/dislike" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/dislike"
+            android:background="@drawable/like"/>
     </RelativeLayout>
 
     <minimal.microfriend.view.AutoListView
         android:id="@+id/context_lv"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"></minimal.microfriend.view.AutoListView>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"></minimal.microfriend.view.AutoListView>
 
 </LinearLayout>
