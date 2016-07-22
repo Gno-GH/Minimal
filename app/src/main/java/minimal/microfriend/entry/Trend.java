@@ -1,7 +1,5 @@
 package minimal.microfriend.entry;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
@@ -56,4 +54,8 @@ public class Trend extends BmobObject {
         this.dislike = dislike;
     }
 
+    @Override
+    public String toString() {
+        return contentText+"----";
+    }
 }

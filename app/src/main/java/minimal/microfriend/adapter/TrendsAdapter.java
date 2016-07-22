@@ -6,6 +6,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,33 +15,33 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
+import cn.bmob.v3.listener.SaveListener;
 import minimal.microfriend.R;
 import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
 import minimal.microfriend.entry.User;
+import minimal.microfriend.utils.ListTable;
 import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.AutoListView;
 
 public class TrendsAdapter extends BaseAdapter{
     private Context context;
     private ArrayList<Trend> trends;
-    private HashMap<Trend, ArrayList<Reply>> allreplies;
+    private ListTable allreplies;
     private User user;
     private PopupWindow mComment;
     private View popView;
     private LinearLayout ll_pop;
-    public TrendsAdapter(Context context, HashMap<Trend, ArrayList<Reply>> allreplies,User user,LinearLayout ll_pop) {
+    private Reply reply;
+
+    public TrendsAdapter(Context context, ListTable allreplies,User user,LinearLayout ll_pop) {
         this.context = context;
         this.allreplies = allreplies;
         this.user = user;
         this.ll_pop = ll_pop;
         trends = new ArrayList<Trend>();
-        List t = Arrays.asList(allreplies.keySet().toArray());
-        for (Object o:t) {
+        for (Trend o:allreplies.keys) {
             trends.add((Trend) o);
         }
 
@@ -68,7 +70,8 @@ public class TrendsAdapter extends BaseAdapter{
             holder = new ViewHolder();
             findViewId(position, convertView, holder);
             childOnClick(holder,position);
-            holder.context_lv.setAdapter(new ReplyAdapter(this.context, allreplies.get(trends.get(position))));
+            holder.adapter = new ReplyAdapter(this.context, allreplies.values.get(position));
+            holder.context_lv.setAdapter(holder.adapter);
             convertView.setTag(holder);
         } else holder = (ViewHolder) convertView.getTag();
         if(!trends.get(position).getCreateUser().getObjectId().equals(user.getObjectId()))
@@ -80,7 +83,7 @@ public class TrendsAdapter extends BaseAdapter{
         return convertView;
     }
 
-    private void childOnClick(ViewHolder holder,int position) {
+    private void childOnClick(final ViewHolder holder, final int position) {
         holder.del_ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,13 +93,45 @@ public class TrendsAdapter extends BaseAdapter{
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popView = View.inflate(context,R.layout.pop_comment,null);
-                mComment = new PopupWindow(popView,
-                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                mComment.setBackgroundDrawable(new BitmapDrawable());
-                mComment.setOutsideTouchable(true);
-                mComment.showAtLocation(ll_pop, Gravity.CENTER, 0, 0);
-                MicroTools.toast(context,"回复");
+                initPopWindows();
+                ImageButton pop_close = (ImageButton) popView.findViewById(R.id.pop_close);
+                pop_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mComment.dismiss();
+                    }
+                });
+                final EditText et_context = (EditText) popView.findViewById(R.id.et_context);
+                Button send_yes = (Button) popView.findViewById(R.id.send_yes);
+                send_yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        reply = new Reply();
+                        reply.setObserver(user);
+                        reply.setReceiver(trends.get(position).getCreateUser());
+                        reply.setIsfrist(true);
+                        if(et_context.getText().toString().trim().equals("")){
+                            et_context.setText("输入不能为空");
+                            return ;
+                        }
+                        reply.setReplycontent(et_context.getText().toString().trim());
+                        reply.setTrend(trends.get(position));
+                        reply.save(context, new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                allreplies.values.get(position).add(reply);
+                                mComment.dismiss();
+                                holder.adapter.notifyDataSetChanged();
+                                TrendsAdapter.this.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+
+                            }
+                        });
+                    }
+                });
             }
         });
         holder.like.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +146,15 @@ public class TrendsAdapter extends BaseAdapter{
                 MicroTools.toast(context,"讨厌");
             }
         });
+    }
+
+    private void initPopWindows() {
+        popView = View.inflate(context, R.layout.pop_comment,null);
+        mComment = new PopupWindow(popView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        mComment.setBackgroundDrawable(new BitmapDrawable());
+        mComment.setOutsideTouchable(true);
+        mComment.showAtLocation(ll_pop, Gravity.CENTER, 0, 0);
     }
 
     /**
@@ -144,5 +188,6 @@ public class TrendsAdapter extends BaseAdapter{
         public TextView context_text;//文本内容
         public ImageView context_image;//图片内容
         public AutoListView context_lv;//评论集合
+        public ReplyAdapter adapter;
     }
 }

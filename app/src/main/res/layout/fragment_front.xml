@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <minimal.microfriend.view.DragLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dl_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                                           android:id="@+id/dl_layout"
+                                           android:layout_width="match_parent"
+                                           android:layout_height="match_parent"
+                                           android:orientation="vertical">
 
     <minimal.microfriend.view.NoScrollViewPager
         android:id="@+id/front_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"></minimal.microfriend.view.NoScrollViewPager>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#adadad"
         ></View>
+
     <RadioGroup
         android:id="@+id/front_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="#FFD700"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radio_mes"
             style="@style/front_radio"
+            android:drawableTop="@drawable/message"
             android:text="消息"
-            android:textSize="40sp" />
+            android:textSize="10sp"/>
 
         <RadioButton
             android:id="@+id/radio_center"
             style="@style/front_radio"
-            android:text="广场"
-            android:textSize="40sp" />
+            android:drawableTop="@drawable/add"
+            android:text="动态"
+            android:textSize="10sp"/>
 
         <RadioButton
             android:id="@+id/radio_micro"
             style="@style/front_radio"
-            android:text="查找"
-            android:textSize="40sp" />
+            android:drawableTop="@drawable/friend"
+            android:text="微友"
+            android:textSize="10sp"/>
     </RadioGroup>
 </minimal.microfriend.view.DragLinearLayout>
