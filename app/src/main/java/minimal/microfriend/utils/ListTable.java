@@ -19,4 +19,12 @@ public class ListTable {
         this.keys.add(trend);
         this.values.add(replies);
     }
+    public void clear(){
+        this.keys.clear();
+        this.values.clear();
+    }
+
+    public int size(){
+        return keys.size();
+    }
 }

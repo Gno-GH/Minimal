@@ -77,7 +77,7 @@ public class CenterPager extends BaseTabPager {
         final BmobQuery<Reply> queryReply = new BmobQuery<Reply>();
         queryReply.include("trend");
         queryReply.include("receiver,observer");
-        queryReply.order("-createdAt");
+        queryReply.order("createdAt");
         queryReply.addWhereEqualTo("trend", mTrends.get(postion));
         queryReply.findObjects(context, new FindListener<Reply>() {
             @Override
@@ -89,8 +89,20 @@ public class CenterPager extends BaseTabPager {
                     if (postion == index) {
                         madapter = new TrendsAdapter(context, allreplies, user, ll_root);
                         trend_rlv.setAdapter(madapter);
-                        linearLayout.addView(trend_rlv);
                         postion = 0;
+                        linearLayout.addView(trend_rlv);
+                        trend_rlv.setOnRefrenshListener(new RefrenshListView.OnRefrenshListener() {
+                            @Override
+                            public void onReFrensh() {
+                                //查询数据
+                                replyRefrensh();
+                            }
+
+                            @Override
+                            public void loadMore() {
+
+                            }
+                        });
                         return;
                     }
                     postion++;
@@ -98,6 +110,63 @@ public class CenterPager extends BaseTabPager {
                 }
             }
 
+            @Override
+            public void onError(int i, String s) {
+                MicroTools.toast(context, "查询失败" + i);
+            }
+        });
+    }
+
+    private void replyRefrensh() {
+        allreplies = new ListTable();
+        mTrends = new ArrayList<Trend>();
+        BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
+        queryTrend.include("createUser");
+        queryTrend.order("-updatedAt");
+        queryTrend.setLimit(10);
+        queryTrend.setSkip(0);
+        queryTrend.findObjects(this.context, new FindListener<Trend>() {
+            @Override
+            public void onSuccess(List<Trend> list) {
+                index = list.size() - 1;
+                for (Trend t : list) {
+                    mTrends.add(t);
+                }
+                //查询正确
+                queryReplyRefrensh();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                MicroTools.toast(context, "查询失败" + i);
+            }
+        });
+    }
+
+    private void queryReplyRefrensh() {
+        final BmobQuery<Reply> queryReply = new BmobQuery<Reply>();
+        queryReply.include("trend");
+        queryReply.include("receiver,observer");
+        queryReply.order("createdAt");
+        queryReply.addWhereEqualTo("trend", mTrends.get(postion));
+        queryReply.findObjects(context, new FindListener<Reply>() {
+            @Override
+            public void onSuccess(List<Reply> list) {
+                if (postion < index + 1) {
+                    replies = new ArrayList<Reply>();
+                    replies = (ArrayList<Reply>) list;
+                    allreplies.add(mTrends.get(postion), replies);
+                    if (postion == index) {
+                        madapter = new TrendsAdapter(context, allreplies, user, ll_root);
+                        trend_rlv.setAdapter(madapter);
+                        trend_rlv.onRefrenshComplete();
+                        postion = 0;
+                        return;
+                    }
+                    postion++;
+                    queryReplyRefrensh();
+                }
+            }
             @Override
             public void onError(int i, String s) {
                 MicroTools.toast(context, "查询失败" + i);

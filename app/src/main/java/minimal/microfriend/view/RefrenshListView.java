@@ -2,6 +2,7 @@ package minimal.microfriend.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -167,6 +168,7 @@ public class RefrenshListView extends ListView implements AbsListView.OnScrollLi
             case STATE_REFRENSHING:
                 pb_refrensh.setVisibility(View.VISIBLE);
                 tv_rf.setText("正在刷新");
+                Log.d("ABC","正在刷新");
                 iv_drag.clearAnimation();//清除动画
                 iv_drag.setVisibility(View.INVISIBLE);
                 break;

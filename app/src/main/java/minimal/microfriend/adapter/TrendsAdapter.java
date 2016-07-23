@@ -25,7 +25,7 @@ import minimal.microfriend.utils.ListTable;
 import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.AutoListView;
 
-public class TrendsAdapter extends BaseAdapter{
+public class TrendsAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Trend> trends;
     private ListTable allreplies;
@@ -34,14 +34,14 @@ public class TrendsAdapter extends BaseAdapter{
     private View popView;
     private LinearLayout ll_pop;
     private Reply reply;
-
-    public TrendsAdapter(Context context, ListTable allreplies,User user,LinearLayout ll_pop) {
+    private int initAdapter = 0;
+    public TrendsAdapter(Context context, ListTable allreplies, User user, LinearLayout ll_pop) {
         this.context = context;
         this.allreplies = allreplies;
         this.user = user;
         this.ll_pop = ll_pop;
         trends = new ArrayList<Trend>();
-        for (Trend o:allreplies.keys) {
+        for (Trend o : allreplies.keys) {
             trends.add((Trend) o);
         }
 
@@ -69,27 +69,30 @@ public class TrendsAdapter extends BaseAdapter{
             convertView = View.inflate(this.context, R.layout.center_listview_item, null);
             holder = new ViewHolder();
             findViewId(position, convertView, holder);
-            childOnClick(holder,position);
-            holder.adapter = new ReplyAdapter(this.context, allreplies.values.get(position));
+            childOnClick(holder, position);
+            holder.adapter = new ReplyAdapter(this.context, allreplies.values.get(position), ll_pop, user, trends.get(position));
             holder.context_lv.setAdapter(holder.adapter);
             convertView.setTag(holder);
-        } else holder = (ViewHolder) convertView.getTag();
-        if(!trends.get(position).getCreateUser().getObjectId().equals(user.getObjectId()))
+        } else
+            holder = (ViewHolder) convertView.getTag();
+        if (!trends.get(position).getCreateUser().getObjectId().equals(user.getObjectId()))
             holder.del_ib.setVisibility(View.INVISIBLE);
         holder.context_text.setText(trends.get(position).getContentText());
         holder.create_time.setText(trends.get(position).getCreatedAt().toString());
         holder.user_name.setText(trends.get(position).getCreateUser().getPetname());
-//		holder.context_image.set
+        //		holder.context_image.set
         return convertView;
     }
 
     private void childOnClick(final ViewHolder holder, final int position) {
+        //删除
         holder.del_ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MicroTools.toast(context,"删除");
+                MicroTools.toast(context, "删除");
             }
         });
+        //评论
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,9 +113,9 @@ public class TrendsAdapter extends BaseAdapter{
                         reply.setObserver(user);
                         reply.setReceiver(trends.get(position).getCreateUser());
                         reply.setIsfrist(true);
-                        if(et_context.getText().toString().trim().equals("")){
+                        if (et_context.getText().toString().trim().equals("")) {
                             et_context.setText("输入不能为空");
-                            return ;
+                            return;
                         }
                         reply.setReplycontent(et_context.getText().toString().trim());
                         reply.setTrend(trends.get(position));
@@ -127,29 +130,31 @@ public class TrendsAdapter extends BaseAdapter{
 
                             @Override
                             public void onFailure(int i, String s) {
-
+                                MicroTools.toast(context, s);
                             }
                         });
                     }
                 });
             }
         });
+        //喜欢
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MicroTools.toast(context,"喜欢");
+                MicroTools.toast(context, "喜欢");
             }
         });
+        //讨厌
         holder.dislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MicroTools.toast(context,"讨厌");
+                MicroTools.toast(context, "讨厌");
             }
         });
     }
 
     private void initPopWindows() {
-        popView = View.inflate(context, R.layout.pop_comment,null);
+        popView = View.inflate(context, R.layout.pop_comment, null);
         mComment = new PopupWindow(popView,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         mComment.setBackgroundDrawable(new BitmapDrawable());
