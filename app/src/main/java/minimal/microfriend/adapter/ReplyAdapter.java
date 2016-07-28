@@ -62,12 +62,17 @@ public class ReplyAdapter extends BaseAdapter {
 			holder.observer = (TextView) convertView.findViewById(R.id.observer);
 			holder.responder = (TextView) convertView.findViewById(R.id.responder);
 			holder.word = (TextView) convertView.findViewById(R.id.word);
+			holder.answer = (TextView) convertView.findViewById(R.id.answer);
 			popCommentWindows(holder,position);
 			convertView.setTag(holder);
 		}
 		else holder = (ViewHolder) convertView.getTag();
 		holder.observer.setText(replies.get(position).getObserver().getPetname());
-		holder.responder.setText(replies.get(position).getReceiver().getPetname());
+		if(replies.get(position).isfrist()) {
+			holder.responder.setVisibility(View.INVISIBLE);
+			holder.answer.setText(":");
+		}
+		else holder.responder.setText(replies.get(position).getReceiver().getPetname()+":");
 		holder.word.setText(replies.get(position).getReplycontent());
 		return convertView;
 	}
@@ -132,5 +137,6 @@ public class ReplyAdapter extends BaseAdapter {
 		public TextView observer;
 		public TextView responder;
 		public TextView word;
+		public TextView answer;
 	}
 }

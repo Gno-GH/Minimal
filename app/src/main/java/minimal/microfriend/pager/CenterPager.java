@@ -52,7 +52,7 @@ public class CenterPager extends BaseTabPager {
         mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
         queryTrend.include("createUser");
-        queryTrend.order("-updatedAt");
+        queryTrend.order("-createdAt");
         queryTrend.setLimit(10);
         queryTrend.setSkip(0);
         queryTrend.findObjects(this.context, new FindListener<Trend>() {
@@ -122,7 +122,7 @@ public class CenterPager extends BaseTabPager {
         mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
         queryTrend.include("createUser");
-        queryTrend.order("-updatedAt");
+        queryTrend.order("-createdAt");
         queryTrend.setLimit(10);
         queryTrend.setSkip(0);
         queryTrend.findObjects(this.context, new FindListener<Trend>() {
@@ -169,6 +169,7 @@ public class CenterPager extends BaseTabPager {
             }
             @Override
             public void onError(int i, String s) {
+                trend_rlv.onRefrenshComplete();
                 MicroTools.toast(context, "查询失败" + i);
             }
         });

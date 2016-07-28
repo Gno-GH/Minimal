@@ -90,8 +90,8 @@ public class TrendsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 MicroTools.toast(context, "删除");
-            }
-        });
+    }
+});
         //评论
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
