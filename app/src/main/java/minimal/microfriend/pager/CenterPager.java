@@ -36,7 +36,7 @@ public class CenterPager extends BaseTabPager {
     }
 
     @Override
-    public void initData() {   
+    public void initData() {
         if (allreplies == null) {
             title_tv.setText("动态");
             trend_rlv = new RefrenshListView(context);

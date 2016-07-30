@@ -222,6 +222,7 @@ public class MinimalLayout extends FrameLayout {
         super.onSizeChanged(w, h, oldw, oldh);
         mwidth = mainLayout.getMeasuredWidth();
         mheight = mainLayout.getMeasuredHeight();
-        mleft = (int) (mwidth * 0.6f);
+        //滑动的最大位置
+        mleft = (int) (mwidth * 0.65f);
     }
 }
