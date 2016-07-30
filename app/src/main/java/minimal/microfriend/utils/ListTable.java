@@ -27,4 +27,8 @@ public class ListTable {
     public int size(){
         return keys.size();
     }
+
+    public ArrayList<Reply> getReplys(Trend trend){
+        return values.get(keys.indexOf(trend));
+    }
 }

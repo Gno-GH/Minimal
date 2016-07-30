@@ -34,7 +34,6 @@ public class TrendsAdapter extends BaseAdapter {
     private View popView;
     private LinearLayout ll_pop;
     private Reply reply;
-    private int initAdapter = 0;
     public TrendsAdapter(Context context, ListTable allreplies, User user, LinearLayout ll_pop) {
         this.context = context;
         this.allreplies = allreplies;
@@ -44,7 +43,6 @@ public class TrendsAdapter extends BaseAdapter {
         for (Trend o : allreplies.keys) {
             trends.add((Trend) o);
         }
-
     }
 
     @Override
@@ -68,15 +66,18 @@ public class TrendsAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(this.context, R.layout.center_listview_item, null);
             holder = new ViewHolder();
+            //查找ID
             findViewId(position, convertView, holder);
-            childOnClick(holder, position);
-            holder.adapter = new ReplyAdapter(this.context, allreplies.values.get(position), ll_pop, user, trends.get(position));
-            holder.context_lv.setAdapter(holder.adapter);
             convertView.setTag(holder);
         } else
             holder = (ViewHolder) convertView.getTag();
         if (!trends.get(position).getCreateUser().getObjectId().equals(user.getObjectId()))
             holder.del_ib.setVisibility(View.INVISIBLE);
+        //处理单击事件
+        childOnClick(holder, position);
+        //设置适配器
+        holder.adapter = new ReplyAdapter(this.context, allreplies.getReplys(trends.get(position)), ll_pop, user, trends.get(position));
+        holder.context_lv.setAdapter(holder.adapter);
         holder.context_text.setText(trends.get(position).getContentText());
         holder.create_time.setText(trends.get(position).getCreatedAt().toString());
         holder.user_name.setText(trends.get(position).getCreateUser().getPetname());
@@ -90,8 +91,8 @@ public class TrendsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 MicroTools.toast(context, "删除");
-    }
-});
+            }
+        });
         //评论
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override

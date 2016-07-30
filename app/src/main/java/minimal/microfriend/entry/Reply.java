@@ -51,4 +51,9 @@ public class Reply extends BmobObject {
     public void setIsfrist(boolean isfrist) {
         this.isfrist = isfrist;
     }
+
+    @Override
+    public String toString() {
+        return getReplycontent();
+    }
 }

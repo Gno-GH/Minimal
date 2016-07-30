@@ -168,7 +168,6 @@ public class RefrenshListView extends ListView implements AbsListView.OnScrollLi
             case STATE_REFRENSHING:
                 pb_refrensh.setVisibility(View.VISIBLE);
                 tv_rf.setText("正在刷新");
-                Log.d("ABC","正在刷新");
                 iv_drag.clearAnimation();//清除动画
                 iv_drag.setVisibility(View.INVISIBLE);
                 break;
@@ -196,12 +195,13 @@ public class RefrenshListView extends ListView implements AbsListView.OnScrollLi
     @Override
     public void onScrollStateChanged(AbsListView absListView, int i) {
         //滚动条空闲
-        if (i == SCROLL_STATE_IDLE && !isLoadingMore&&userFootView) {
-            isLoadingMore = true;
+        if (i == SCROLL_STATE_IDLE &&userFootView) {
+
             int lastPos = getLastVisiblePosition();
-            if (lastPos >= getCount() - 1) {
+            if ((lastPos == getCount() - 1)&& !isLoadingMore) {
                 mFootview.setPadding(0, 0, 0, 0);
-                setSelection(getCount() - 1);
+                isLoadingMore = true;
+                setSelection(getCount()-1);
                 if (mListener != null) {
                     mListener.loadMore();
                 }
@@ -222,11 +222,4 @@ public class RefrenshListView extends ListView implements AbsListView.OnScrollLi
 
         public void loadMore();//加载更多
     }
-//
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
-//                MeasureSpec.AT_MOST);
-//        super.onMeasure(widthMeasureSpec, expandSpec);
-//    }
 }
