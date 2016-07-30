@@ -99,6 +99,8 @@ public class WelcomeActivity extends BaseActivity {
 				iv.setAlpha(fraction);
 			}
 		});
+		animator.setDuration(3000);
+		animator.start();
 		animator.addListener(new AnimatorListener() {
 
 			@Override
@@ -123,8 +125,5 @@ public class WelcomeActivity extends BaseActivity {
 			public void onAnimationCancel(Animator animation) {
 			}
 		});
-		animator.setDuration(3000);
-		animator.start();
 	}
-
 }

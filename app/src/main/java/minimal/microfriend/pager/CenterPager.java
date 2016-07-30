@@ -38,6 +38,7 @@ public class CenterPager extends BaseTabPager {
     @Override
     public void initData() {
         if (allreplies == null) {
+            title_tv.setText("动态");
             trend_rlv = new RefrenshListView(context);
             trend_rlv.setDividerHeight(0);
             trend_rlv.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影

@@ -15,6 +15,7 @@ public class MicroPager extends BaseTabPager {
     }
     @Override
     public void initData(){
+        title_tv.setText("好友栏");
     }
 }
 

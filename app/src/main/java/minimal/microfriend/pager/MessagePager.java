@@ -20,6 +20,7 @@ public class MessagePager extends BaseTabPager{
     @Override
     public void initData(){
         if(isaddview) {
+            title_tv.setText("消息栏");
             tv = new TextView(this.context);
             tv.setText("消息");
             tv.setTextSize(25);

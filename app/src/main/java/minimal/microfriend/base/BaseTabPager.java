@@ -3,6 +3,7 @@ package minimal.microfriend.base;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import minimal.microfriend.R;
 import minimal.microfriend.entry.User;
@@ -15,6 +16,7 @@ public class BaseTabPager {
     public LinearLayout linearLayout;
     public LinearLayout ll_root;
     private View rootView;
+    public TextView title_tv;
     public User user;
     public boolean isaddview = true;
 
@@ -27,6 +29,7 @@ public class BaseTabPager {
         View view = View.inflate(this.context, R.layout.tab_basepager, null);
         linearLayout = (LinearLayout) view.findViewById(R.id.tab_base_ll);
         ll_root = (LinearLayout) view.findViewById(R.id.ll_root);
+        title_tv = (TextView) view.findViewById(R.id.title_tv);
         return view;
     }
 
