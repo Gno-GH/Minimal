@@ -16,7 +16,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * Created by gno on 16/7/30.   
+ * Created by gno on 16/7/30.
  */
 public class CricularView extends ImageView {
     private Paint mPaintBitmap = new Paint(Paint.ANTI_ALIAS_FLAG);

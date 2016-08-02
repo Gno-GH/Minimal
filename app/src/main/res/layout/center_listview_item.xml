@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
 
-        <ImageView
+        <minimal.microfriend.view.CricularView
             android:id="@+id/head_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"

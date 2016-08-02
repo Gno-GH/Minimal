@@ -24,6 +24,7 @@ import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.ListTable;
 import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.AutoListView;
+import minimal.microfriend.view.CricularView;
 
 public class TrendsAdapter extends BaseAdapter {
     private Context context;
@@ -171,7 +172,7 @@ public class TrendsAdapter extends BaseAdapter {
      * @param holder
      */
     private void findViewId(int position, View convertView, ViewHolder holder) {
-        holder.head_iv = (ImageView) convertView.findViewById(R.id.head_iv);
+        holder.head_iv = (CricularView) convertView.findViewById(R.id.head_iv);
         holder.user_name = (TextView) convertView.findViewById(R.id.user_name);
         holder.create_time = (TextView) convertView.findViewById(R.id.create_time);
         holder.del_ib = (ImageButton) convertView.findViewById(R.id.del_ib);
@@ -184,7 +185,7 @@ public class TrendsAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        public ImageView head_iv;//头像
+        public CricularView head_iv;//头像
         public TextView user_name;//昵称
         public TextView create_time;//创建时间
         public ImageButton del_ib;//删除按钮

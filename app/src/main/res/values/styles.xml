@@ -16,13 +16,15 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-	<style name="front_radio">
-	    <item name="android:layout_width">0dp</item>
-	    <item name="android:layout_weight">1</item>
-	    <item name="android:layout_height">wrap_content</item>
-	    <item name="android:button">@null</item>
-	    <item name="android:gravity">center_horizontal</item>
-	</style>
+
+    <style name="front_radio">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="translucent">
         <item name="android:windowNoTitle">true</item><!--无标题栏-->
         <item name="android:windowFullscreen">true</item><!--无状态栏-->
@@ -31,5 +33,15 @@
         <item name="android:windowBackground">@color/translucent_background</item>
         <item name="android:windowIsTranslucent">true</item><!--半透明-->
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <style name="left_menu">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textColor">#000000</item>
     </style>
 </resources>
