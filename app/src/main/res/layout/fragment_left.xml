@@ -47,11 +47,14 @@
                 android:textSize="12dp"/>
 
             <Button
+                android:id="@+id/b_select_state"
                 android:layout_width="45dp"
-                android:layout_height="25dp"
+                android:layout_height="24dp"
+                android:layout_alignBottom="@id/tv_number"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@id/tv_number"/>
+                android:layout_toRightOf="@id/tv_number"
+                android:background="@drawable/onclass"/>
         </RelativeLayout>
 
         <ImageView

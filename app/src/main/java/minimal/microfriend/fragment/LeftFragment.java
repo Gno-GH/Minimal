@@ -1,9 +1,17 @@
 package minimal.microfriend.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import minimal.microfriend.R;
@@ -11,19 +19,40 @@ import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.MicroTools;
 
-public class LeftFragment extends BaseFragment implements View.OnClickListener {
+public class LeftFragment extends BaseFragment implements View.OnClickListener, View.OnTouchListener {
     private ImageView iv_userimg;
     private TextView tv_petname, tv_number;
     private TextView tv_class, tv_diary, tv_interest, tv_join;
     private ImageView iv_class, iv_diary, iv_interest, iv_join;
+    private PopupWindow selectState;
+    private View popView;
+    private Button b_select_state;
+    private ListView lv_state;
+    private int[] state = {R.drawable.onclass, R.drawable.free, R.drawable.busy, R.drawable.outline};
 
     @SuppressLint("InflateParams")
     @Override
     public View iniView(LayoutInflater inflater) {
+        //状态窗口初始化
+        popView = View.inflate(activity, R.layout.pop_select_state, null);
+        lv_state = (ListView) popView.findViewById(R.id.lv_state);
+        lv_state.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影
+        lv_state.setVerticalScrollBarEnabled(false);//隐藏滚动条
+        selectState = new PopupWindow(popView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        selectState.setBackgroundDrawable(new BitmapDrawable());
+        selectState.setOutsideTouchable(true);
+
+        //侧边栏view
         View view = inflater.inflate(R.layout.fragment_left, null);
         iv_userimg = (ImageView) view.findViewById(R.id.iv_userimg);
         tv_number = (TextView) view.findViewById(R.id.tv_number);
         tv_petname = (TextView) view.findViewById(R.id.tv_petname);
+        b_select_state = (Button) view.findViewById(R.id.b_select_state);
+
+        b_select_state.setOnClickListener(this);
+        iv_userimg.setOnClickListener(this);
+        iv_userimg.setOnTouchListener(this);
 
         tv_class = (TextView) view.findViewById(R.id.tv_class);
         tv_diary = (TextView) view.findViewById(R.id.tv_diary);
@@ -43,6 +72,7 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener {
         iv_join.setOnClickListener(this);
         iv_diary.setOnClickListener(this);
 
+        lv_state.setAdapter(new StateAdapter());
         return view;
     }
 
@@ -83,22 +113,83 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener {
             case R.id.iv_diary:
                 myDiary();
                 break;
+            case R.id.iv_userimg:
+                myMeans();
+                break;
+            case R.id.b_select_state:
+                selectState.showAsDropDown(b_select_state);
+                break;
         }
     }
-
+    //TODO: 用户个人资料查看与修改 头像的单击事件
+    private void myMeans() {
+        MicroTools.toast(activity, "我的资料");
+    }
+    //TODO: 用户课程表查看修改
     private void myClass() {
-        MicroTools.toast(activity,"CLASS");
+        MicroTools.toast(activity, "CLASS");
     }
-
+    //TODO: 用户兴趣爱好
     private void myInterest() {
-        MicroTools.toast(activity,"INTEREST");
+        MicroTools.toast(activity, "INTEREST");
     }
-
+    //TODO: 用户的参与
     private void myJoin() {
-        MicroTools.toast(activity,"JOIN");
+        MicroTools.toast(activity, "JOIN");
+    }
+    //TODO: 私人日记
+    private void myDiary() {
+        MicroTools.toast(activity, "DIARY");
     }
 
-    private void myDiary() {
-        MicroTools.toast(activity,"DIARY");
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (view.getId()) {
+            case R.id.iv_userimg:
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        iv_userimg.setAlpha(0.7f);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        iv_userimg.setAlpha(1.0f);
+                        break;
+                }
+                break;
+        }
+        return false;
+    }
+
+    class StateAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return state.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return state[i];
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(final int i, View view, ViewGroup viewGroup) {
+            view = View.inflate(activity, R.layout.listview_state, null);
+            ImageButton ib_state = (ImageButton) view.findViewById(R.id.ib_state);
+            ib_state.setBackgroundResource(state[i]);
+            ib_state.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MicroTools.toast(activity, "" + i);
+                    //TODO: 此处设置状态 访问网络并修改状态
+                    b_select_state.setBackgroundResource(state[i]);//设置状态
+                    selectState.dismiss();//隐藏弹出窗口
+                }
+            });
+            return view;
+        }
     }
 }
