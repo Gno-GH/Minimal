@@ -1,6 +1,7 @@
 package minimal.microfriend.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,6 +16,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import minimal.microfriend.R;
+import minimal.microfriend.activity.ClassActivity;
+import minimal.microfriend.activity.MeansActivity;
 import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.MicroTools;
@@ -29,6 +32,7 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
     private Button b_select_state;
     private ListView lv_state;
     private int[] state = {R.drawable.onclass, R.drawable.free, R.drawable.busy, R.drawable.outline};
+    private Intent mIntent;
 
     @SuppressLint("InflateParams")
     @Override
@@ -121,22 +125,32 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
     }
+
     //TODO: 用户个人资料查看与修改 头像的单击事件
     private void myMeans() {
         MicroTools.toast(activity, "我的资料");
+        mIntent = new Intent(activity, MeansActivity.class);
+        mIntent.putExtra("user",user);
+        startActivity(mIntent);
     }
+
     //TODO: 用户课程表查看修改
     private void myClass() {
         MicroTools.toast(activity, "CLASS");
+        mIntent = new Intent(activity, ClassActivity.class);
+        startActivity(mIntent);
     }
+
     //TODO: 用户兴趣爱好
     private void myInterest() {
         MicroTools.toast(activity, "INTEREST");
     }
+
     //TODO: 用户的参与
     private void myJoin() {
         MicroTools.toast(activity, "JOIN");
     }
+
     //TODO: 私人日记
     private void myDiary() {
         MicroTools.toast(activity, "DIARY");

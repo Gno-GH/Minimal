@@ -33,6 +33,12 @@ public class MicroTools {
         }
         return after;
     }
+
+    /***
+     * 静态吐司
+     * @param context
+     * @param str
+     */
     public static void toast(Context context ,String str ) {
         if(mtoast == null)
         mtoast = Toast.makeText(context,str,Toast.LENGTH_SHORT);

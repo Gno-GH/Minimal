@@ -32,7 +32,8 @@ public class LogonActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logon_main);
         initView();
-        MicroTools.toast(this,getUser().getSchool().getSname()+""+getUser().getMajor().getMname());
+        user = (minimal.microfriend.entry.User) getIntent().getSerializableExtra("user");
+        MicroTools.toast(this,user.getSchool().getSname()+""+user.getMajor().getMname());
         intent = new Intent(LogonActivity.this,minimal.microfriend.MainActivity.class);
     }
 
@@ -54,7 +55,7 @@ public class LogonActivity extends BaseActivity implements View.OnClickListener 
                     //学号是否存在
                     BmobQuery<UserID> userIDBmobQuery = new BmobQuery<UserID>();
                     userIDBmobQuery.include("school");
-                    userIDBmobQuery.addWhereEqualTo("school",getUser().getSchool());
+                    userIDBmobQuery.addWhereEqualTo("school",user.getSchool());
                     userIDBmobQuery.addWhereEqualTo("userid",usernumber);
                     userIDBmobQuery.findObjects(this, new FindListener<UserID>() {
                         @Override
@@ -67,18 +68,18 @@ public class LogonActivity extends BaseActivity implements View.OnClickListener 
                                         @Override
                                         public void onSuccess() {
                                             //执行注册
-                                            if(rb_boy.isChecked())getUser().setSex("男");
-                                            else getUser().setSex("女");
-                                            getUser().setUsername(usernumber);
-                                            getUser().setPassword(MicroTools.MD5(userpassword));
-                                            getUser().signUp(LogonActivity.this, new SaveListener() {
+                                            if(rb_boy.isChecked())user.setSex("男");
+                                            else user.setSex("女");
+                                            user.setUsername(usernumber);
+                                            user.setPassword(MicroTools.MD5(userpassword));
+                                            user.signUp(LogonActivity.this, new SaveListener() {
                                                 @Override
                                                 public void onSuccess() {
                                                     //保存信息
                                                     SharePrefences.setBoolbean(LogonActivity.this,LOGINED,true);
                                                     SharePrefences.setString(LogonActivity.this,USERPASSWORD, MicroTools.MD5(userpassword));
                                                     SharePrefences.setString(LogonActivity.this,USERNAME, usernumber);
-                                                    intent.putExtra("user",getUser());
+                                                    intent.putExtra("user",user);
                                                     startActivity(intent);
                                                     LogonActivity.this.finish();
                                                 }

@@ -12,12 +12,12 @@ public abstract class BaseActivity extends Activity {
 	public static final String USERNAME = "username";
 	public Intent intent;
 	public abstract void initView();
-	private static User User;
+	public User user;
 	public void initData(){}
-	public void setUser(minimal.microfriend.entry.User user) {
-		User = user;
-	}
-	public minimal.microfriend.entry.User getUser() {
-		return User;
-	}
+//	public void setUser(minimal.microfriend.entry.User user) {
+//		user = user;
+//	}
+//	public minimal.microfriend.entry.User getUser() {
+//		return user;
+//	}
 }

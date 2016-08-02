@@ -56,10 +56,10 @@ public class LoginActivity extends BaseActivity {
                 //a、检查数据合法
                 final String password = et_student_password.getText().toString().trim();
                 final String usernumber = et_student_number.getText().toString().trim();
-                setUser(new User());
-                getUser().setPassword(MicroTools.MD5(password));
-                getUser().setUsername(usernumber);
-                getUser().login(LoginActivity.this, new SaveListener() {
+                user = new User();
+                user.setPassword(MicroTools.MD5(password));
+                user.setUsername(usernumber);
+                user.login(LoginActivity.this, new SaveListener() {
                     @Override
                     public void onSuccess() {
                         BmobQuery<minimal.microfriend.entry.User> userquery = new BmobQuery<User>();

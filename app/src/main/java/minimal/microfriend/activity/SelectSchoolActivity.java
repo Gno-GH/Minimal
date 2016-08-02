@@ -75,8 +75,8 @@ public class SelectSchoolActivity extends BaseActivity{
                         public void onSuccess(List<School> list) {
                             if(list.size()==1) {
                                 mSchool = list.get(0);
-                                setUser(new User());
-                                getUser().setSchool(mSchool);
+                                user = new User();
+                                user.setSchool(mSchool);
                                 BmobQuery<Depart> departBmobQuery = new BmobQuery<Depart>();
                                 departBmobQuery.include("school");
                                 departBmobQuery.addWhereEqualTo("school",mSchool);
@@ -118,7 +118,7 @@ public class SelectSchoolActivity extends BaseActivity{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Depart depart = departs.get(i);
-                getUser().setDepart(depart);
+                user.setDepart(depart);
                 BmobQuery<Major> majorBmobQuery = new BmobQuery<Major>();
                 majorBmobQuery.include("depart");
                 majorBmobQuery.addWhereEqualTo("depart",depart);
@@ -136,8 +136,9 @@ public class SelectSchoolActivity extends BaseActivity{
                             lv_major.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    getUser().setMajor(majors.get(i));
+                                    user.setMajor(majors.get(i));
                                     intent = new Intent(SelectSchoolActivity.this,minimal.microfriend.activity.LogonActivity.class);
+                                    intent.putExtra("user",user);
                                     SelectSchoolActivity.this.startActivity(intent);
                                     mojarWindow.dismiss();
                                     SelectSchoolActivity.this.finish();
