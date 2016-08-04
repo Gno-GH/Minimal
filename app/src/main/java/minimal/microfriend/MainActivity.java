@@ -41,6 +41,12 @@ public class MainActivity extends FragmentActivity {
         transaction.commit();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mini_layout.derail();
+    }
+
     public FrontFragment getFrontFragment() {
         return mfront;
     }

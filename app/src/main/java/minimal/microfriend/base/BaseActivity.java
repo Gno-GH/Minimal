@@ -14,10 +14,4 @@ public abstract class BaseActivity extends Activity {
 	public abstract void initView();
 	public User user;
 	public void initData(){}
-//	public void setUser(minimal.microfriend.entry.User user) {
-//		user = user;
-//	}
-//	public minimal.microfriend.entry.User getUser() {
-//		return user;
-//	}
 }

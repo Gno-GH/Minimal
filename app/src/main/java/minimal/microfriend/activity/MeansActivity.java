@@ -14,6 +14,7 @@ import minimal.microfriend.base.BaseActivity;
  * Created by gno on 16/8/2.
  */
 public class MeansActivity extends BaseActivity {
+    //TODO: 个人资料修改待完善
     private GridView gd_mood;
     private MoodAdapter mMoodAdapter;
     private String[] mStrings = {"看电视", "玩手机", "游泳", "玩游戏", "听歌"};

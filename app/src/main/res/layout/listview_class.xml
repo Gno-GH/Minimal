@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <TextView
+        android:textColor="@color/yellow"
+        android:id="@+id/tv_date"
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ems="1"
+        android:gravity="center_vertical"
+        android:text="日期"/>
+
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_name_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="课程名"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_site_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课地点"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_oe_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单/双"/>
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_number_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数"/>
+        </LinearLayout>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_start_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_end_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_teacher_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任课老师"
+            android:textAlignment="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_name_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="课程名"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_site_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课地点"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_oe_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单/双"/>
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_number_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数"/>
+        </LinearLayout>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_start_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_end_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_teacher_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任课老师"
+            android:textAlignment="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_name_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="课程名"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_site_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课地点"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_oe_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单/双"/>
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_number_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数"/>
+        </LinearLayout>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_start_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_end_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_teacher_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任课老师"
+            android:textAlignment="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_name_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="课程名"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_site_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课地点"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_oe_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单/双"/>
+
+            <TextView
+                android:textColor="@color/yellow"
+                android:id="@+id/tv_class_number_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人数"/>
+        </LinearLayout>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_start_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_end_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下课时间"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:textColor="@color/yellow"
+            android:id="@+id/tv_class_teacher_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任课老师"
+            android:textAlignment="center"/>
+    </LinearLayout>
+</LinearLayout>
