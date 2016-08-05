@@ -12,6 +12,7 @@ import minimal.microfriend.R;
  * Created by gno on 16/8/3.
  */
 public class WeekAdapter extends BaseAdapter {
+    //TODO: 课程表数据适配器待完成
     private Context mContext;
     private String[] mWeeks;
 
@@ -44,7 +45,7 @@ public class WeekAdapter extends BaseAdapter {
             findId(hodler,view);
             view.setTag(hodler);
         }else hodler = (ViewHodler) view.getTag();
-        hodler.tv_date.setText(mWeeks[i]);
+        hodler.tv_date.setText(mWeeks[i])   ;
         return view;
     }
 

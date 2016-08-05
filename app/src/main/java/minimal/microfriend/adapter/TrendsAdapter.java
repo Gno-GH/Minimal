@@ -15,9 +15,15 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.DeleteListener;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import minimal.microfriend.R;
+import minimal.microfriend.entry.Interaction;
 import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
 import minimal.microfriend.entry.User;
@@ -35,6 +41,7 @@ public class TrendsAdapter extends BaseAdapter {
     private View popView;
     private LinearLayout ll_pop;
     private Reply reply;
+
     public TrendsAdapter(Context context, ListTable allreplies, User user, LinearLayout ll_pop) {
         this.context = context;
         this.allreplies = allreplies;
@@ -82,8 +89,31 @@ public class TrendsAdapter extends BaseAdapter {
         holder.context_text.setText(trends.get(position).getContentText());
         holder.create_time.setText(trends.get(position).getCreatedAt().toString());
         holder.user_name.setText(trends.get(position).getCreateUser().getPetname());
-        //		holder.context_image.set
+        setInteractionNumber(position, holder);
+        //TODO: 发表的图片 待完成
+        //holder.context_image.set
         return convertView;
+    }
+
+    /**
+     * 设置喜欢和不喜欢的数量
+     *
+     * @param position
+     * @param holder
+     */
+    private void setInteractionNumber(int position, ViewHolder holder) {
+        if (trends.get(position).getLike() > 0 && trends.get(position).getLike() < 99)
+            holder.tv_like_number.setText(trends.get(position).getLike() + "");
+        else if (trends.get(position).getLike() == 0)
+            holder.tv_like_number.setText("");
+        else
+            holder.tv_like_number.setText("99+");
+        if (trends.get(position).getDislike() > 0 && trends.get(position).getDislike() < 99)
+            holder.tv_dislike_number.setText(trends.get(position).getDislike() + "");
+        else if (trends.get(position).getDislike() == 0)
+            holder.tv_dislike_number.setText("");
+        else
+            holder.tv_dislike_number.setText("99+");
     }
 
     private void childOnClick(final ViewHolder holder, final int position) {
@@ -143,14 +173,207 @@ public class TrendsAdapter extends BaseAdapter {
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MicroTools.toast(context, "喜欢");
+                setLike(position, holder);
             }
         });
         //讨厌
         holder.dislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MicroTools.toast(context, "讨厌");
+                setDisLike(position, holder);
+            }
+        });
+    }
+
+    private void setDisLike(final int position, final ViewHolder holder) {
+        //先查讨厌是否已经存在
+        BmobQuery<Interaction> interactionBmobQuery = new BmobQuery<Interaction>();
+        interactionBmobQuery.include("trend");
+        interactionBmobQuery.include("user");
+        interactionBmobQuery.addWhereEqualTo("trend", trends.get(position));
+        interactionBmobQuery.addWhereEqualTo("user", user);
+        interactionBmobQuery.addWhereEqualTo("type", 0);
+        interactionBmobQuery.findObjects(context, new FindListener<Interaction>() {
+            @Override
+            public void onSuccess(List<Interaction> list) {
+                if (list.size() == 1) {
+                    MicroTools.toast(context, "亲!别那么绝情嘛!");
+                    return;
+                }
+                //没讨厌过
+                Interaction interactionlike = new Interaction();
+                interactionlike.setTrend(trends.get(position));
+                interactionlike.setUser(user);
+                interactionlike.setType(0);
+                interactionlike.save(context, new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        //成功后更新帖子 喜欢数量和不喜欢数量
+                        BmobQuery<Interaction> interactionBmobQuery = new BmobQuery<Interaction>();
+                        interactionBmobQuery.include("trend");
+                        interactionBmobQuery.include("user");
+                        interactionBmobQuery.addWhereEqualTo("trend", trends.get(position));
+                        interactionBmobQuery.addWhereEqualTo("user", user);
+                        interactionBmobQuery.addWhereEqualTo("type", 1);
+                        interactionBmobQuery.findObjects(context, new FindListener<Interaction>() {
+                            @Override
+                            public void onSuccess(List<Interaction> list) {
+                                if (list.size() == 1) {
+                                    list.get(0).delete(context, new DeleteListener() {
+                                        @Override
+                                        public void onSuccess() {
+                                            trends.get(position).setLike(trends.get(position).getLike() - 1);
+                                            trends.get(position).setDislike(trends.get(position).getDislike() + 1);
+                                            trends.get(position).update(context, new UpdateListener() {
+                                                @Override
+                                                public void onSuccess() {
+                                                    setInteractionNumber(position,holder);
+                                                    MicroTools.toast(context, "再接再厉!");
+                                                }
+
+                                                @Override
+                                                public void onFailure(int i, String s) {
+                                                    MicroTools.toast(context, s);
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onFailure(int i, String s) {
+                                            MicroTools.toast(context,s);
+                                        }
+                                    });
+
+                                } else {
+                                    trends.get(position).setDislike(trends.get(position).getDislike() + 1);
+                                    trends.get(position).update(context, new UpdateListener() {
+                                        @Override
+                                        public void onSuccess() {
+                                            setInteractionNumber(position, holder);
+                                            MicroTools.toast(context, "再接再厉");
+                                        }
+
+                                        @Override
+                                        public void onFailure(int i, String s) {
+                                            MicroTools.toast(context, s);
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                MicroTools.toast(context, s);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        MicroTools.toast(context, s);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                MicroTools.toast(context, s);
+            }
+        });
+    }
+
+    private void setLike(final int position, final ViewHolder holder) {
+        //先查喜欢是否已经存在
+        BmobQuery<Interaction> interactionBmobQuery = new BmobQuery<Interaction>();
+        interactionBmobQuery.include("trend");
+        interactionBmobQuery.include("user");
+        interactionBmobQuery.addWhereEqualTo("trend", trends.get(position));
+        interactionBmobQuery.addWhereEqualTo("user", user);
+        interactionBmobQuery.addWhereEqualTo("type", 1);
+        interactionBmobQuery.findObjects(context, new FindListener<Interaction>() {
+            @Override
+            public void onSuccess(List<Interaction> list) {
+                if (list.size() == 1) {
+                    MicroTools.toast(context, "亲!你已经赞过了哦!");
+                    return;
+                }
+                //没赞过
+                Interaction interactionlike = new Interaction();
+                interactionlike.setTrend(trends.get(position));
+                interactionlike.setUser(user);
+                interactionlike.setType(1);
+                interactionlike.save(context, new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        //成功后更新帖子 喜欢数量和不喜欢数量
+                        BmobQuery<Interaction> interactionBmobQuery = new BmobQuery<Interaction>();
+                        interactionBmobQuery.include("trend");
+                        interactionBmobQuery.include("user");
+                        interactionBmobQuery.addWhereEqualTo("trend", trends.get(position));
+                        interactionBmobQuery.addWhereEqualTo("user", user);
+                        interactionBmobQuery.addWhereEqualTo("type", 0);
+                        interactionBmobQuery.findObjects(context, new FindListener<Interaction>() {
+                            @Override
+                            public void onSuccess(List<Interaction> list) {
+                                if (list.size() == 1) {
+                                    list.get(0).delete(context, new DeleteListener() {
+                                        @Override
+                                        public void onSuccess() {
+                                            trends.get(position).setLike(trends.get(position).getLike() + 1);
+                                            trends.get(position).setDislike(trends.get(position).getDislike() - 1);
+                                            trends.get(position).update(context, new UpdateListener() {
+                                                @Override
+                                                public void onSuccess() {
+                                                    setInteractionNumber(position, holder);
+                                                    MicroTools.toast(context, "哎呦!不错哦!");
+                                                }
+
+                                                @Override
+                                                public void onFailure(int i, String s) {
+                                                    MicroTools.toast(context, s);
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onFailure(int i, String s) {
+                                            MicroTools.toast(context,s);
+                                        }
+                                    });
+                                } else {
+                                    trends.get(position).setLike(trends.get(position).getLike() + 1);
+                                    trends.get(position).update(context, new UpdateListener() {
+                                        @Override
+                                        public void onSuccess() {
+                                            setInteractionNumber(position, holder);
+                                            MicroTools.toast(context, "哎呦!不错哦!");
+                                        }
+
+                                        @Override
+                                        public void onFailure(int i, String s) {
+                                            MicroTools.toast(context, s);
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                MicroTools.toast(context, s);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        MicroTools.toast(context, s);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                MicroTools.toast(context, s);
             }
         });
     }
@@ -182,6 +405,8 @@ public class TrendsAdapter extends BaseAdapter {
         holder.context_text = (TextView) convertView.findViewById(R.id.context_text);
         holder.context_image = (ImageView) convertView.findViewById(R.id.context_image);
         holder.context_lv = (AutoListView) convertView.findViewById(R.id.context_lv);
+        holder.tv_like_number = (TextView) convertView.findViewById(R.id.tv_like_number);
+        holder.tv_dislike_number = (TextView) convertView.findViewById(R.id.tv_dislike_number);
     }
 
     class ViewHolder {
@@ -196,5 +421,6 @@ public class TrendsAdapter extends BaseAdapter {
         public ImageView context_image;//图片内容
         public AutoListView context_lv;//评论集合
         public ReplyAdapter adapter;
+        public TextView tv_like_number, tv_dislike_number;
     }
 }

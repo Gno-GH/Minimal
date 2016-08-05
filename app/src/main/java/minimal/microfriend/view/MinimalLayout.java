@@ -6,6 +6,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v4.widget.ViewDragHelper.Callback;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,11 @@ public class MinimalLayout extends FrameLayout {
     private int mleftdx;
     private OnDragListener dragListener;
     private Status status = Status.Close;
-    public Status getStatus(){
+
+    public Status getStatus() {
         return status;
     }
+
     public static enum Status {
         Open, Close, Draging;
     }
@@ -156,7 +159,6 @@ public class MinimalLayout extends FrameLayout {
                 mainLayout.layout(left, 0, left + mwidth, mheight);
             }
     }
-
     /**
      * 自动切换开关
      */
@@ -178,6 +180,22 @@ public class MinimalLayout extends FrameLayout {
         }
     }
 
+    public void keepStatus(){
+        if (status == Status.Open) {
+            isOpen(mleft, true);
+            if (dragListener != null) {
+                dragListener.onOpen();
+            }
+            status = Status.Open;
+        }
+        if (status == Status.Close) {
+            isOpen(0, true);
+            if (dragListener != null) {
+                dragListener.onClose();
+            }
+            status = Status.Close;
+        }
+    }
     public void computeScroll() {
         super.computeScroll();
         if (dragHelper.continueSettling(true)) {

@@ -83,20 +83,38 @@
             android:layout_marginRight="7dp"
             android:background="@drawable/answer"/>
 
+        <TextView
+            android:id="@+id/tv_dislike_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/comment"
+            android:text="99+"
+            android:textColor="#000"
+            android:textSize="10sp"/>
+
         <ImageButton
             android:id="@+id/dislike"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginRight="7dp"
-            android:layout_toLeftOf="@id/comment"
+            android:layout_toLeftOf="@id/tv_dislike_number"
             android:background="@drawable/dislike"/>
+
+        <TextView
+            android:id="@+id/tv_like_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/dislike"
+            android:text="99+"
+            android:textColor="#000"
+            android:textSize="10sp"/>
 
         <ImageButton
             android:id="@+id/like"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginRight="7dp"
-            android:layout_toLeftOf="@id/dislike"
+            android:layout_toLeftOf="@id/tv_like_number"
             android:background="@drawable/like"/>
     </RelativeLayout>
 

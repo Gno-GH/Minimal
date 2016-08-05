@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity {
 
     private void initFragment() {
         mfront = new FrontFragment(mini_layout);
-        mleft = new LeftFragment();
+        mleft = new LeftFragment(mini_layout);
         Bundle bundle = new Bundle();
         bundle.putSerializable("user",user);
         mleft.setArguments(bundle);
@@ -41,17 +41,17 @@ public class MainActivity extends FragmentActivity {
         transaction.commit();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mini_layout.derail();
-    }
-
     public FrontFragment getFrontFragment() {
         return mfront;
     }
 
     public LeftFragment getLeftFragment() {
         return mleft;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mini_layout.derail();
     }
 }

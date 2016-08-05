@@ -14,11 +14,13 @@
         android:layout_marginRight="15dp">
 
         <Button
+            android:id="@+id/b_means_close"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"/>
 
         <Button
+            android:id="@+id/b_means_edit"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"/>

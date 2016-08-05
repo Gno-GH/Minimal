@@ -1,6 +1,5 @@
 package minimal.microfriend.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
@@ -21,8 +20,10 @@ import minimal.microfriend.activity.MeansActivity;
 import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.MicroTools;
+import minimal.microfriend.view.MinimalLayout;
 
 public class LeftFragment extends BaseFragment implements View.OnClickListener, View.OnTouchListener {
+    private MinimalLayout minimalLayout;
     private ImageView iv_userimg;
     private TextView tv_petname, tv_number;
     private TextView tv_class, tv_diary, tv_interest, tv_join;
@@ -33,8 +34,11 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
     private ListView lv_state;
     private int[] state = {R.drawable.onclass, R.drawable.free, R.drawable.busy, R.drawable.outline};
     private Intent mIntent;
+    public LeftFragment(MinimalLayout minimalLayout){
+        super();
+        this.minimalLayout = minimalLayout;
+    }
 
-    @SuppressLint("InflateParams")
     @Override
     public View iniView(LayoutInflater inflater) {
         //状态窗口初始化
