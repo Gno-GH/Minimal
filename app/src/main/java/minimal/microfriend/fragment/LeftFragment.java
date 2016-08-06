@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import minimal.microfriend.R;
 import minimal.microfriend.activity.ClassActivity;
+import minimal.microfriend.activity.DiaryActivity;
 import minimal.microfriend.activity.MeansActivity;
 import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.entry.User;
@@ -130,17 +131,13 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    //TODO: 用户个人资料查看与修改 头像的单击事件
     private void myMeans() {
-        MicroTools.toast(activity, "我的资料");
         mIntent = new Intent(activity, MeansActivity.class);
         mIntent.putExtra("user",user);
         startActivity(mIntent);
     }
 
-    //TODO: 用户课程表查看修改
     private void myClass() {
-        MicroTools.toast(activity, "CLASS");
         mIntent = new Intent(activity, ClassActivity.class);
         startActivity(mIntent);
     }
@@ -155,9 +152,10 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
         MicroTools.toast(activity, "JOIN");
     }
 
-    //TODO: 私人日记
     private void myDiary() {
-        MicroTools.toast(activity, "DIARY");
+        mIntent = new Intent(activity, DiaryActivity.class);
+        mIntent.putExtra("user",user);
+        startActivity(mIntent);
     }
 
     @Override

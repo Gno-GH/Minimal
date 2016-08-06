@@ -29,6 +29,7 @@ public class CenterPager extends BaseTabPager {
     private int index = 0;
     private int postion = 0;
     private int startX = 0;
+    private boolean mQuerySuccess = false;
 
     public CenterPager(Context context, User user) {
         super(context);
@@ -43,8 +44,9 @@ public class CenterPager extends BaseTabPager {
             trend_rlv.setDividerHeight(0);
             trend_rlv.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影
             trend_rlv.setVerticalScrollBarEnabled(false);//隐藏滚动条
-            initTrends();
         }
+        if (!mQuerySuccess)
+            initTrends();
     }
 
     private void initTrends() {
@@ -104,6 +106,7 @@ public class CenterPager extends BaseTabPager {
 
                             }
                         });
+                        mQuerySuccess = true;
                         return;
                     }
                     postion++;
@@ -113,6 +116,7 @@ public class CenterPager extends BaseTabPager {
 
             @Override
             public void onError(int i, String s) {
+                mQuerySuccess = false;
                 MicroTools.toast(context, "查询失败" + i);
             }
         });
@@ -168,6 +172,7 @@ public class CenterPager extends BaseTabPager {
                     queryReplyRefrensh();
                 }
             }
+
             @Override
             public void onError(int i, String s) {
                 trend_rlv.onRefrenshComplete();

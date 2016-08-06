@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_parent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="0dp"
+              android:background="#eaee00"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp">
+
+        <Button
+            android:id="@+id/b_diary_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="我的日记"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/b_diary_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/answer"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"/>
+    </RelativeLayout>
+
+    <GridView
+        android:paddingLeft="10dp"
+        android:id="@+id/gv_diary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"></GridView>
+
+    <TextView
+        android:id="@+id/tv_no_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂无日记"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+</LinearLayout>
