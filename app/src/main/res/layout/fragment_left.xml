@@ -115,7 +115,7 @@
             <TextView
                 android:id="@+id/tv_join"
                 style="@style/left_menu"
-                android:text="我参与的"/>
+                android:text="我的动态"/>
         </LinearLayout>
 
         <LinearLayout
