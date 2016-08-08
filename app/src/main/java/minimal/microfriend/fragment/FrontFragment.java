@@ -89,9 +89,8 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
         switch (v.getId()) {
             case R.id.radio_center:
                 if (radio_center.isChecked()) {
-//                    Intent intent = new Intent(this.activity,minimal.microfriend.activity.DialogActivity.class);
+                    //TODO:动态发表
                     MicroTools.toast(this.activity,"弹出窗口");
-//                    startActivity(intent);
                 }
                 break;
         }

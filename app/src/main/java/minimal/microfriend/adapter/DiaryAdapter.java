@@ -167,7 +167,6 @@ public class DiaryAdapter extends BaseAdapter implements View.OnClickListener {
                 mDiaries.get(i).getImg().download(context, new DownloadFileListener() {
                     @Override
                     public void onSuccess(String s) {
-                        MicroTools.toast(context, s);
                         Drawable dimg = Drawable.createFromPath(s);
                         iv_img.setBackground(dimg);
                     }

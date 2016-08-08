@@ -1,5 +1,6 @@
 package minimal.microfriend.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,17 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UploadFileListener;
 import minimal.microfriend.R;
 import minimal.microfriend.adapter.DiaryAdapter;
 import minimal.microfriend.base.BaseActivity;
@@ -43,6 +48,7 @@ public class DiaryActivity extends BaseActivity implements View.OnClickListener 
     private RadioButton rb_cloudy, rb_fine, rb_rain, rb_snow;
     private EditText et_year, et_date, et_context;
     private ArrayList<Diary> mDiaries;
+    private ImageView iv_img;
     private Diary mDiary;
 
     @Override
@@ -77,6 +83,9 @@ public class DiaryActivity extends BaseActivity implements View.OnClickListener 
         et_year = (EditText) popView.findViewById(R.id.et_year);
         et_date = (EditText) popView.findViewById(R.id.et_date);
         et_context = (EditText) popView.findViewById(R.id.et_context);
+
+        iv_img = (ImageView) popView.findViewById(R.id.iv_img);
+        iv_img.setOnClickListener(this);
 
         mDiaryPop = new PopupWindow(popView,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -142,27 +151,21 @@ public class DiaryActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.b_ok:
                 setWeatherAndContent();
-                mDiary.save(DiaryActivity.this, new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                        //TODO:添加本地日记
-                        mDiaries.add(mDiary);
-                        tv_no_one.setVisibility(View.INVISIBLE);
-                        mDiaryAdapter.notifyDataSetChanged();
-                        et_year.setText("");
-                        et_date.setText("");
-                        et_context.setText("");
-                        rb_fine.setChecked(true);
-                        rb_bg_1.setChecked(true);
-                        ll_bg.setBackgroundResource(R.drawable.diary_bg_1);
-                        mDiaryPop.dismiss();
-                    }
+                if (mDiary.getImg() != null) {
+                    mDiary.getImg().upload(DiaryActivity.this, new UploadFileListener() {
+                        @Override
+                        public void onSuccess() {
+                            mDiarySave();
+                        }
 
-                    @Override
-                    public void onFailure(int i, String s) {
-                        MicroTools.toast(DiaryActivity.this, "亲网络似乎在开小差!");
-                    }
-                });
+                        @Override
+                        public void onFailure(int i, String s) {
+                            MicroTools.toast(DiaryActivity.this, "亲网络似乎在开小差!");
+                        }
+                    });
+                } else
+                    mDiarySave();
+
                 break;
             case R.id.rb_bg_1:
                 mDiary.setBgtype(1);
@@ -176,7 +179,48 @@ public class DiaryActivity extends BaseActivity implements View.OnClickListener 
                 mDiary.setBgtype(3);
                 ll_bg.setBackgroundResource(R.drawable.diary_bg_3);
                 break;
+            case R.id.iv_img:
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 0);
+                break;
         }
+    }
+
+    private void mDiarySave() {
+        mDiary.save(DiaryActivity.this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                //TODO:添加本地日记
+                mDiaries.add(mDiary);
+                tv_no_one.setVisibility(View.INVISIBLE);
+                mDiaryAdapter.notifyDataSetChanged();
+                et_year.setText("");
+                et_date.setText("");
+                et_context.setText("");
+                rb_fine.setChecked(true);
+                rb_bg_1.setChecked(true);
+                ll_bg.setBackgroundResource(R.drawable.diary_bg_1);
+                iv_img.setImageURI(null);
+                mDiaryPop.dismiss();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                MicroTools.toast(DiaryActivity.this, "亲网络似乎在开小差!");
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            iv_img.setImageURI(data.getData());
+            File img = MicroTools.uriToFile(data.getData(), DiaryActivity.this,user);
+            BmobFile bimg = new BmobFile(img);
+            mDiary.setImg(bimg);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setWeatherAndContent() {

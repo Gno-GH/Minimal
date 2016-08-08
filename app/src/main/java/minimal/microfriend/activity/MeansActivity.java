@@ -82,5 +82,8 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+    }
 }
