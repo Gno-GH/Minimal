@@ -1,8 +1,7 @@
 package minimal.microfriend.entry;
 
-import java.util.List;
-
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 动态类
@@ -10,7 +9,7 @@ import cn.bmob.v3.BmobObject;
 public class Trend extends BmobObject {
     private User createUser;//创建者
     private String contentText;//文本内容
-    private List contentImgs;//图片路径集合
+    private BmobFile contentImg;//图片
     private Integer like;//喜欢
     private Integer dislike;//讨厌
 
@@ -30,12 +29,12 @@ public class Trend extends BmobObject {
         this.contentText = contentText;
     }
 
-    public List getContentImgs() {
-        return contentImgs;
+    public BmobFile getContentImg() {
+        return contentImg;
     }
 
-    public void setContentImgs(List contentImgs) {
-        this.contentImgs = contentImgs;
+    public void setContentImg(BmobFile contentImg) {
+        this.contentImg = contentImg;
     }
 
     public Integer getLike() {

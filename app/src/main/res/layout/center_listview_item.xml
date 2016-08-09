@@ -52,7 +52,6 @@
             android:layout_marginTop="7dp"
             android:background="@drawable/del"/>
     </RelativeLayout>
-
     <TextView
         android:id="@+id/context_text"
         android:layout_width="fill_parent"
@@ -64,11 +63,10 @@
 
     <ImageView
         android:id="@+id/context_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone"
         />
-
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="27dp"

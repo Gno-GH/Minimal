@@ -28,8 +28,8 @@ public class CenterPager extends BaseTabPager {
     private TrendsAdapter madapter;
     private int index = 0;
     private int postion = 0;
-    private int startX = 0;
     private boolean mQuerySuccess = false;
+
 
     public CenterPager(Context context, User user) {
         super(context);
@@ -39,6 +39,8 @@ public class CenterPager extends BaseTabPager {
     @Override
     public void initData() {
         if (allreplies == null) {
+            allreplies = new ListTable();
+            mTrends = new ArrayList<Trend>();
             title_tv.setText("动态");
             trend_rlv = new RefrenshListView(context);
             trend_rlv.setDividerHeight(0);
@@ -51,8 +53,6 @@ public class CenterPager extends BaseTabPager {
 
     private void initTrends() {
         //初始化
-        allreplies = new ListTable();
-        mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
         queryTrend.include("createUser");
         queryTrend.order("-createdAt");
@@ -166,6 +166,7 @@ public class CenterPager extends BaseTabPager {
                         trend_rlv.setAdapter(madapter);
                         trend_rlv.onRefrenshComplete();
                         postion = 0;
+                        trend_rlv.setSelection(0);
                         return;
                     }
                     postion++;
@@ -179,5 +180,10 @@ public class CenterPager extends BaseTabPager {
                 MicroTools.toast(context, "查询失败" + i);
             }
         });
+    }
+
+    public void trendAdd(Trend trend) {
+        allreplies.add(trend, new ArrayList<Reply>());
+        replyRefrensh();
     }
 }

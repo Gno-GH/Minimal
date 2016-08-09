@@ -11,7 +11,7 @@ import minimal.microfriend.entry.User;
 /**
  * Created by gno on 16-5-28.
  */
-public class BaseTabPager {
+public class BaseTabPager{
     public Context context;
     public LinearLayout linearLayout;
     public LinearLayout ll_root;

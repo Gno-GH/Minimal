@@ -2,6 +2,7 @@ package minimal.microfriend.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.DeleteListener;
+import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -70,19 +73,20 @@ public class TrendsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //TODO:缓存错位BUG
         ViewHolder holder;
-        if (convertView == null) {
-            convertView = View.inflate(this.context, R.layout.center_listview_item, null);
-            holder = new ViewHolder();
-            //查找ID
-            findViewId(position, convertView, holder);
-            convertView.setTag(holder);
-        } else
-            holder = (ViewHolder) convertView.getTag();
+        convertView = View.inflate(this.context, R.layout.center_listview_item, null);
+        holder = new ViewHolder();
+        //查找ID
+        findViewId(position, convertView, holder);
         if (!trends.get(position).getCreateUser().getObjectId().equals(user.getObjectId()))
             holder.del_ib.setVisibility(View.INVISIBLE);
         //处理单击事件
         childOnClick(holder, position);
+        if (trends.get(position).getContentImg() != null) {
+            holder.context_image.setVisibility(View.VISIBLE);
+            downAndSetImg(position, holder);
+        }
         //设置适配器
         holder.adapter = new ReplyAdapter(this.context, allreplies.getReplys(trends.get(position)), ll_pop, user, trends.get(position));
         holder.context_lv.setAdapter(holder.adapter);
@@ -90,9 +94,29 @@ public class TrendsAdapter extends BaseAdapter {
         holder.create_time.setText(trends.get(position).getCreatedAt().toString());
         holder.user_name.setText(trends.get(position).getCreateUser().getPetname());
         setInteractionNumber(position, holder);
-        //TODO: 发表的图片 待完成
-        //holder.context_image.set
         return convertView;
+    }
+
+    private void downAndSetImg(int position, final ViewHolder holder) {
+        File img = new File(context.getCacheDir() + "/bmob/" +
+                trends.get(position).getContentImg().getFilename());
+        if (img.exists()) {
+            Drawable dimg = Drawable.createFromPath(img.getPath());
+            holder.context_image.setBackground(dimg);
+        } else {
+            trends.get(position).getContentImg().download(context, new DownloadFileListener() {
+                @Override
+                public void onSuccess(String s) {
+                    Drawable dimg = Drawable.createFromPath(s);
+                    holder.context_image.setBackground(dimg);
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    MicroTools.toast(context, "网络错误");
+                }
+            });
+        }
     }
 
     /**
@@ -227,7 +251,7 @@ public class TrendsAdapter extends BaseAdapter {
                                             trends.get(position).update(context, new UpdateListener() {
                                                 @Override
                                                 public void onSuccess() {
-                                                    setInteractionNumber(position,holder);
+                                                    setInteractionNumber(position, holder);
                                                     MicroTools.toast(context, "再接再厉!");
                                                 }
 
@@ -240,7 +264,7 @@ public class TrendsAdapter extends BaseAdapter {
 
                                         @Override
                                         public void onFailure(int i, String s) {
-                                            MicroTools.toast(context,s);
+                                            MicroTools.toast(context, s);
                                         }
                                     });
 
@@ -337,7 +361,7 @@ public class TrendsAdapter extends BaseAdapter {
 
                                         @Override
                                         public void onFailure(int i, String s) {
-                                            MicroTools.toast(context,s);
+                                            MicroTools.toast(context, s);
                                         }
                                     });
                                 } else {

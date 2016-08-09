@@ -44,4 +44,9 @@
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:textColor">#000000</item>
     </style>
+
+    <style name="pop_trend_anim">
+        <item name="android:windowEnterAnimation">@anim/pop_trend_open</item>
+        <item name="android:windowExitAnimation">@anim/pop_trend_close</item>
+    </style>
 </resources>
