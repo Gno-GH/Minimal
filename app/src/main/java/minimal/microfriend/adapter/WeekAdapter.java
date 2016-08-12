@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import minimal.microfriend.R;
+import minimal.microfriend.entry.OwnerClass;
 
 /**
  * Created by gno on 16/8/3.
@@ -14,21 +15,21 @@ import minimal.microfriend.R;
 public class WeekAdapter extends BaseAdapter {
     //TODO: 课程表数据适配器待完成
     private Context mContext;
-    private String[] mWeeks;
+    private OwnerClass mWeeks;
 
-    public WeekAdapter(Context context, String[] weeks) {
+    public WeekAdapter(Context context, OwnerClass weeks) {
         this.mContext = context;
         this.mWeeks = weeks;
     }
 
     @Override
     public int getCount() {
-        return mWeeks.length;
+        return mWeeks.weekclass.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return mWeeks[i];
+        return mWeeks.weekclass.get(i);
     }
 
     @Override
@@ -42,14 +43,55 @@ public class WeekAdapter extends BaseAdapter {
         if (view == null) {
             view = View.inflate(mContext, R.layout.listview_class, null);
             hodler = new ViewHodler();
-            findId(hodler,view);
+            findId(hodler, view);
             view.setTag(hodler);
-        }else hodler = (ViewHodler) view.getTag();
-        hodler.tv_date.setText(mWeeks[i])   ;
+        } else
+            hodler = (ViewHodler) view.getTag();
+        hodler.tv_date.setText(mWeeks.weekclass.get(i).date);
+        setAllText(i, hodler);
         return view;
     }
 
-    private void findId(ViewHodler hodler,View view) {
+    private void setAllText(int i, ViewHodler hodler) {
+        if (mWeeks.weekclass.get(i).dayclass.get(0) != null) {
+            hodler.tv_class_name_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classname);
+            hodler.tv_class_site_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classsite);
+            hodler.tv_class_oe_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classoe);
+            hodler.tv_class_number_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classnumber);
+            hodler.tv_class_start_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classstart);
+            hodler.tv_class_end_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classend);
+            hodler.tv_class_teacher_1.setText(mWeeks.weekclass.get(i).dayclass.get(0).classteacher);
+        }
+        if (mWeeks.weekclass.get(i).dayclass.get(1) != null) {
+            hodler.tv_class_name_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classname);
+            hodler.tv_class_site_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classsite);
+            hodler.tv_class_oe_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classoe);
+            hodler.tv_class_number_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classnumber);
+            hodler.tv_class_start_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classstart);
+            hodler.tv_class_end_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classend);
+            hodler.tv_class_teacher_2.setText(mWeeks.weekclass.get(i).dayclass.get(1).classteacher);
+        }
+        if (mWeeks.weekclass.get(i).dayclass.get(2) != null) {
+            hodler.tv_class_name_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classname);
+            hodler.tv_class_site_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classsite);
+            hodler.tv_class_oe_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classoe);
+            hodler.tv_class_number_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classnumber);
+            hodler.tv_class_start_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classstart);
+            hodler.tv_class_end_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classend);
+            hodler.tv_class_teacher_3.setText(mWeeks.weekclass.get(i).dayclass.get(2).classteacher);
+        }
+        if (mWeeks.weekclass.get(i).dayclass.get(3) != null) {
+            hodler.tv_class_name_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classname);
+            hodler.tv_class_site_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classsite);
+            hodler.tv_class_oe_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classoe);
+            hodler.tv_class_number_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classnumber);
+            hodler.tv_class_start_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classstart);
+            hodler.tv_class_end_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classend);
+            hodler.tv_class_teacher_4.setText(mWeeks.weekclass.get(i).dayclass.get(3).classteacher);
+        }
+    }
+
+    private void findId(ViewHodler hodler, View view) {
         hodler.tv_date = (TextView) view.findViewById(R.id.tv_date);
         //上午第一大节
         hodler.tv_class_name_1 = (TextView) view.findViewById(R.id.tv_class_name_1);

@@ -9,9 +9,11 @@ import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -90,12 +92,13 @@ public class MicroTools {
                 MD5(user.getObjectId() + new Date()) +
                 file.getPath().substring(file.getPath().indexOf("."),
                         file.getPath().length()));
-        fileCopy(file,mdfile);
+        fileCopy(file, mdfile);
         return mdfile;
     }
 
     /**
      * 文件复制
+     *
      * @param source
      * @param target
      */
@@ -110,8 +113,7 @@ public class MicroTools {
             while ((i = fis.read(buf)) != -1) {
                 fos.write(buf, 0, i);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -121,5 +123,35 @@ public class MicroTools {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 文件读取字符串
+     *
+     * @param file
+     * @return
+     */
+    public static String fileToString(File file) {
+        StringBuffer sb = new StringBuffer();
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+            String line = null;
+            while((line= br.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                br.close();
+                fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
     }
 }

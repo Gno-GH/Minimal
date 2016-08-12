@@ -137,7 +137,6 @@ public class DiaryActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.b_diary_add:
                 mDiary = new Diary();
-                //TODO:日记图片未设置
                 mDiary.setUser(user);
                 mDiary.setBgtype(1);
                 mDiary.setWeather(2);

@@ -139,6 +139,7 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
 
     private void myClass() {
         mIntent = new Intent(activity, ClassActivity.class);
+        mIntent.putExtra("user",user);
         startActivity(mIntent);
     }
 

@@ -145,6 +145,7 @@ public class TrendsAdapter extends BaseAdapter {
         holder.del_ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO:帖子删除
                 MicroTools.toast(context, "删除");
             }
         });

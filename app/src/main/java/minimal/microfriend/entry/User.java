@@ -19,6 +19,15 @@ public class User extends BmobUser implements Serializable{
     private BmobFile userphoto;//用户头像
     private String petname;//用户昵称
     private String brith;//用户生日
+    private Integer level;//用户的年级
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 
     public String getBrith() {
         return brith;

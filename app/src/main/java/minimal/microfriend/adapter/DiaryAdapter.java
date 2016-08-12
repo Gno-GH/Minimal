@@ -111,6 +111,7 @@ public class DiaryAdapter extends BaseAdapter implements View.OnClickListener {
                     tv_no_one.setVisibility(View.VISIBLE);
                 notifyDataSetChanged();
             }
+
             @Override
             public void onFailure(int i, String s) {
                 MicroTools.toast(context, "网络似乎在开小差!");
