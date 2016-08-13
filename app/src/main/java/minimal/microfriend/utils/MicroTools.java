@@ -12,11 +12,13 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.security.MessageDigest;
 import java.util.Date;
 
@@ -153,5 +155,29 @@ public class MicroTools {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 字符串写入到文件
+     * @param file
+     * @param str
+     */
+    public static void WriteStringToFile(File file,String str) {
+        PrintStream ps = null;
+        FileOutputStream fos = null;
+        try {
+            fos =new FileOutputStream(file);
+            ps = new PrintStream(fos);
+            ps.println(str);// 往文件里写入字符串
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

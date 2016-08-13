@@ -23,6 +23,7 @@
         ></View>
 
     <LinearLayout
+        android:id="@+id/ll_part_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
@@ -94,6 +95,7 @@
         ></View>
 
     <LinearLayout
+        android:id="@+id/ll_part_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
@@ -165,6 +167,7 @@
         ></View>
 
     <LinearLayout
+        android:id="@+id/ll_part_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
@@ -236,6 +239,7 @@
         ></View>
 
     <LinearLayout
+        android:id="@+id/ll_part_4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"

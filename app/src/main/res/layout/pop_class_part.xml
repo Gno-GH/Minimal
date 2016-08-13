@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="#eaae00"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/et_part_name"
+            style="@style/part_et"
+            android:layout_marginBottom="10dp"
+            android:hint="课程名称"/>
+
+        <EditText
+            android:id="@+id/et_part_site"
+            style="@style/part_et"
+            android:layout_marginBottom="10dp"
+            android:hint="上课地点"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/rg_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/rb_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/rb_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"/>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/et_part_number"
+                android:inputType="number"
+                style="@style/part_et"
+                android:enabled="false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="上课人数"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_part_start"
+            style="@style/part_et"
+            android:layout_marginBottom="10dp"
+            android:hint="开始时间"/>
+
+        <EditText
+            android:id="@+id/et_part_end"
+            style="@style/part_et"
+            android:layout_marginBottom="10dp"
+            android:hint="结束时间"/>
+
+        <EditText
+            android:id="@+id/et_part_teacher"
+            style="@style/part_et"
+            android:layout_marginBottom="10dp"
+            android:hint="任课老师"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/b_pop_save"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"/>
+
+            <Button
+                android:id="@+id/b_pop_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_toLeftOf="@id/b_pop_save"/>
+
+            <Button
+                android:id="@+id/b_pop_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_toRightOf="@id/b_pop_save"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_pop_close"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/close"/>
+</RelativeLayout>
