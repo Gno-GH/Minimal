@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+              android:layout_width="fill_parent"
               android:layout_height="320dp"
               android:layout_margin="0dp"
               android:background="#eaea00"
@@ -9,10 +9,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp">
+        android:layout_margin="0dp"
+        android:layout_height="55dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp">
 
         <Button
             android:id="@+id/b_trend_close"

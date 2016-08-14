@@ -111,7 +111,7 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
     private void iniPopWindow() {
         popview = View.inflate(activity, R.layout.pop_trend, null);
         popTrendIss = new PopupWindow(popview,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popTrendIss.setAnimationStyle(R.style.pop_trend_anim);
         popTrendIss.setBackgroundDrawable(new BitmapDrawable());
         popTrendIss.setOutsideTouchable(true);

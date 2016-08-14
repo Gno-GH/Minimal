@@ -34,6 +34,7 @@
         <activity android:name=".activity.ClassActivity"/>
         <activity android:name=".activity.MeansActivity"/>
         <activity android:name=".activity.DiaryActivity"/>
+        <activity android:name=".activity.OwnerTrendsActivity"/>
         <!--
         <activity
             android:name=".activity.DialogActivity"

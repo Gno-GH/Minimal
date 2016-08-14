@@ -18,6 +18,7 @@ import minimal.microfriend.R;
 import minimal.microfriend.activity.ClassActivity;
 import minimal.microfriend.activity.DiaryActivity;
 import minimal.microfriend.activity.MeansActivity;
+import minimal.microfriend.activity.OwnerTrendsActivity;
 import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.MicroTools;
@@ -130,7 +131,7 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
     }
-
+    //TODO:检测资料是否完善
     private void myMeans() {
         mIntent = new Intent(activity, MeansActivity.class);
         mIntent.putExtra("user",user);
@@ -148,9 +149,10 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
         MicroTools.toast(activity, "INTEREST");
     }
 
-    //TODO: 用户的参与
     private void myJoin() {
-        MicroTools.toast(activity, "JOIN");
+        mIntent = new Intent(activity, OwnerTrendsActivity.class);
+        mIntent.putExtra("user",user);
+        startActivity(mIntent);
     }
 
     private void myDiary() {
