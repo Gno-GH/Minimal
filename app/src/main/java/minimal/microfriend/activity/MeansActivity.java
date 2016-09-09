@@ -1,15 +1,18 @@
 package minimal.microfriend.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import minimal.microfriend.R;
 import minimal.microfriend.base.BaseActivity;
+import minimal.microfriend.view.CricularView;
 
 /**
  * Created by gno on 16/8/2.
@@ -17,6 +20,9 @@ import minimal.microfriend.base.BaseActivity;
 public class MeansActivity extends BaseActivity implements View.OnClickListener {
     //TODO: 个人资料修改待完善
     private GridView gd_mood;
+    private CricularView cv_userimg;
+    private TextView tv_age,tv_depart;
+    private ImageView tv_sex;
     private MoodAdapter mMoodAdapter;
     private String[] mStrings = {"看电视", "玩手机", "游泳", "玩游戏", "听歌"};
     private Button b_means_close, b_means_edit;
@@ -34,6 +40,11 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
         mMoodAdapter = new MoodAdapter();
         gd_mood = (GridView) findViewById(R.id.gd_mood);
         gd_mood.setAdapter(mMoodAdapter);
+        cv_userimg = (CricularView) findViewById(R.id.cv_userimg);
+        cv_userimg.setOnClickListener(this);
+        tv_age = (TextView) findViewById(R.id.tv_age);
+        tv_depart = (TextView) findViewById(R.id.tv_depart);
+        tv_sex = (ImageView) findViewById(R.id.tv_sex);
         b_means_close = (Button) findViewById(R.id.b_means_close);
         b_means_edit = (Button) findViewById(R.id.b_means_edit);
         b_means_edit.setOnClickListener(this);
@@ -52,6 +63,10 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.b_means_edit:
+                break;
+            case R.id.cv_userimg:
+                intent = new Intent(MeansActivity.this,ImgSelectActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -80,10 +95,5 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
             tv_mood.setText(mStrings[i]);
             return view;
         }
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
     }
 }

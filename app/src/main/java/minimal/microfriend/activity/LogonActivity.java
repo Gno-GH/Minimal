@@ -70,6 +70,7 @@ public class LogonActivity extends BaseActivity implements View.OnClickListener 
                                             //执行注册
                                             if(rb_boy.isChecked())user.setSex("男");
                                             else user.setSex("女");
+                                            user.setPetname("我是萌新");
                                             user.setUsername(usernumber);
                                             user.setPassword(MicroTools.MD5(userpassword));
                                             user.signUp(LogonActivity.this, new SaveListener() {

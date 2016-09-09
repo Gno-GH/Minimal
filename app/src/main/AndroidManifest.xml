@@ -35,6 +35,7 @@
         <activity android:name=".activity.MeansActivity"/>
         <activity android:name=".activity.DiaryActivity"/>
         <activity android:name=".activity.OwnerTrendsActivity"/>
+        <activity android:name=".activity.ImgSelectActivity"/>
         <!--
         <activity
             android:name=".activity.DialogActivity"

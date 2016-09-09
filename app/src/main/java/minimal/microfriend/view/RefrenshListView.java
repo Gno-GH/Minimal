@@ -211,7 +211,6 @@ public class RefrenshListView extends ListView implements AbsListView.OnScrollLi
 
     @Override
     public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
     }
 
     /**
