@@ -10,48 +10,55 @@
         android:id="@+id/cv_img"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="15dp"
-        android:layout_gravity="center_vertical"
         android:background="#000" />
 
     <LinearLayout
-        android:layout_marginRight="35dp"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="35dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_cname"
-            android:textColor="#000"
-            android:layout_marginBottom="5dp"
-            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="飞翔的图图" />
+            android:layout_marginBottom="5dp"
+            android:text="飞翔的图图"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_cdepart"
-            android:textColor="#3e3e3e"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="信息工程系" />
+            android:text="信息工程系"
+            android:textColor="#3e3e3e" />
     </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_level"
-        android:layout_marginRight="10dp"
-        android:layout_gravity="center_vertical"
-        android:background="#0f0"
         android:layout_width="25dp"
-        android:layout_height="25dp" />
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="#0f0" />
+
     <ImageView
         android:id="@+id/iv_sex"
-        android:layout_marginRight="10dp"
-        android:layout_gravity="center_vertical"
-        android:background="#f00"
         android:layout_width="25dp"
-        android:layout_height="25dp" />
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="#f00" />
+
     <ImageView
-        android:background="@drawable/collude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"/>
+        android:id="@+id/iv_sendmsg"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/collude" />
 </LinearLayout>

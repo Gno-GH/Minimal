@@ -38,9 +38,9 @@
         android:layout_height="1dp"
         android:background="#aeaeae" />
 
-    <ListView
+    <minimal.microfriend.view.AutoListView
         android:id="@+id/lv_concacts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"></minimal.microfriend.view.AutoListView>
 
 </LinearLayout>

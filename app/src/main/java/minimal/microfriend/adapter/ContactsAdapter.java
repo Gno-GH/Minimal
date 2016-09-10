@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import minimal.microfriend.R;
 import minimal.microfriend.entry.Contacts;
 import minimal.microfriend.entry.User;
+import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.CricularView;
 
 /**
@@ -61,10 +62,18 @@ public class ContactsAdapter extends BaseAdapter {
             hodler.tv_cdepart = (TextView) view.findViewById(R.id.tv_cdepart);
             hodler.iv_level = (ImageView) view.findViewById(R.id.iv_level);
             hodler.iv_sex = (ImageView) view.findViewById(R.id.iv_sex);
+            hodler.iv_sendmsg = (ImageView) view.findViewById(R.id.iv_sendmsg);
             view.setTag(hodler);
         } else {
             hodler = (ViewHodler) view.getTag();
         }
+        hodler.iv_sendmsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MicroTools.toast(context,"开始聊天");
+                //TODO 打开消息界面 可以进行聊天
+            }
+        });
         if (model == 0) {
             //TODO :好友信息设置 系院无法查询
             hodler.tv_cname.setText(schoolFriend.get(position).getPetname());
@@ -79,6 +88,6 @@ public class ContactsAdapter extends BaseAdapter {
     class ViewHodler {
         public CricularView cv_img;
         public TextView tv_cname, tv_cdepart;
-        public ImageView iv_level, iv_sex;
+        public ImageView iv_level, iv_sex,iv_sendmsg;
     }
 }

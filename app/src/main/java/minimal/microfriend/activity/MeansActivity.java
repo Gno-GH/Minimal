@@ -65,6 +65,7 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
             case R.id.b_means_edit:
                 break;
             case R.id.cv_userimg:
+                //TODO 打开这个新的Activity 可以图片裁剪
                 intent = new Intent(MeansActivity.this,ImgSelectActivity.class);
                 startActivity(intent);
                 break;
