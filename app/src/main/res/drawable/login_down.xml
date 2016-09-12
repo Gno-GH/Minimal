@@ -11,5 +11,5 @@
     <stroke
         android:width="0.5dp"
         android:color="#D9D9D9" /> <!-- 图片边框属性 -->
-    <corners android:radius="20dp" /> <!-- 圆角的程度 -->
+    <corners android:radius="3dp" /> <!-- 圆角的程度 -->
 </shape>

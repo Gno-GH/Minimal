@@ -25,6 +25,8 @@ public class ContactsAdapter extends BaseAdapter {
     private ArrayList<User> schoolFriend;
     private ArrayList<Contacts> ownerFriend;
     private int model;//适配器模式
+    private int[] levelImg = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five};
+    private int[] sexImg = {R.drawable.sex_boy, R.drawable.sex_girl};
 
     public ContactsAdapter(User user, Context context, ArrayList<User> schoolFriend, ArrayList<Contacts> ownerFriend, int model) {
         this.user = user;
@@ -53,6 +55,7 @@ public class ContactsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
+        int level = 1;
         ViewHodler hodler;
         if (view == null) {
             view = View.inflate(context, R.layout.contacts_listview_item, null);
@@ -70,24 +73,38 @@ public class ContactsAdapter extends BaseAdapter {
         hodler.iv_sendmsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MicroTools.toast(context,"开始聊天");
+                MicroTools.toast(context, "开始聊天");
                 //TODO 打开消息界面 可以进行聊天
             }
         });
         if (model == 0) {
             //TODO :好友信息设置 系院无法查询
+            level = 17 - Integer.parseInt(schoolFriend.get(position).getUsername().substring(0, 2));
             hodler.tv_cname.setText(schoolFriend.get(position).getPetname());
             hodler.tv_cdepart.setText(schoolFriend.get(position).getDepart().getDname());
-        }else {
+            if (schoolFriend.get(position).getSex().equals("男"))
+                hodler.iv_sex.setBackgroundResource(sexImg[0]);
+            else hodler.iv_sex.setBackgroundResource(sexImg[1]);
+        } else {
+            level = 17 - Integer.parseInt(ownerFriend.get(position).getFriend().getUsername().substring(0, 2));
             hodler.tv_cname.setText(ownerFriend.get(position).getFriend().getPetname());
             hodler.tv_cdepart.setText(ownerFriend.get(position).getFriend().getDepart().getDname());
+            Log.d("ABC",ownerFriend.get(position).getFriend().getDepart().getDname());
+            if (ownerFriend.get(position).getFriend().getSex().equals("男"))
+                hodler.iv_sex.setBackgroundResource(sexImg[0]);
+            else hodler.iv_sex.setBackgroundResource(sexImg[1]);
         }
+        setLevel(hodler, level);
         return view;
+    }
+
+    private void setLevel(ViewHodler hodler, int level) {
+        hodler.iv_level.setBackgroundResource(levelImg[level - 1]);
     }
 
     class ViewHodler {
         public CricularView cv_img;
         public TextView tv_cname, tv_cdepart;
-        public ImageView iv_level, iv_sex,iv_sendmsg;
+        public ImageView iv_level, iv_sex, iv_sendmsg;
     }
 }

@@ -29,13 +29,9 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView iv_userimg;
     private TextView tv_petname, tv_number;
     private TextView tv_class, tv_diary, tv_interest, tv_join;
-    private ImageView iv_class, iv_diary, iv_interest, iv_join;
-    private PopupWindow selectState;
-    private View popView;
-    private Button b_select_state;
-    private ListView lv_state;
-    private int[] state = {R.drawable.onclass, R.drawable.free, R.drawable.busy, R.drawable.outline};
+    private ImageView iv_class, iv_diary, iv_interest, iv_join,iv_user_level;
     private Intent mIntent;
+    private int[] levelImg = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five};
     public LeftFragment(MinimalLayout minimalLayout){
         super();
         this.minimalLayout = minimalLayout;
@@ -43,24 +39,12 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public View iniView(LayoutInflater inflater) {
-        //状态窗口初始化
-        popView = View.inflate(activity, R.layout.pop_select_state, null);
-        lv_state = (ListView) popView.findViewById(R.id.lv_state);
-        lv_state.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影
-        lv_state.setVerticalScrollBarEnabled(false);//隐藏滚动条
-        selectState = new PopupWindow(popView,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        selectState.setBackgroundDrawable(new BitmapDrawable());
-        selectState.setOutsideTouchable(true);
-
         //侧边栏view
         View view = inflater.inflate(R.layout.fragment_left, null);
+        iv_user_level = (ImageView) view.findViewById(R.id.iv_user_level);
         iv_userimg = (ImageView) view.findViewById(R.id.iv_userimg);
         tv_number = (TextView) view.findViewById(R.id.tv_number);
         tv_petname = (TextView) view.findViewById(R.id.tv_petname);
-        b_select_state = (Button) view.findViewById(R.id.b_select_state);
-
-        b_select_state.setOnClickListener(this);
         iv_userimg.setOnClickListener(this);
         iv_userimg.setOnTouchListener(this);
 
@@ -81,8 +65,6 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
         iv_interest.setOnClickListener(this);
         iv_join.setOnClickListener(this);
         iv_diary.setOnClickListener(this);
-
-        lv_state.setAdapter(new StateAdapter());
         return view;
     }
 
@@ -94,6 +76,11 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
                 tv_petname.setText(user.getPetname());
             tv_number.setText(user.getUsername());
         }
+        setLevel(17 - Integer.parseInt(user.getUsername().substring(0, 2)));
+    }
+
+    private void setLevel(int i) {
+        iv_user_level.setBackgroundResource(levelImg[i-1]);
     }
 
     @Override
@@ -125,9 +112,6 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.iv_userimg:
                 myMeans();
-                break;
-            case R.id.b_select_state:
-                selectState.showAsDropDown(b_select_state);
                 break;
         }
     }
@@ -176,39 +160,5 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
         return false;
-    }
-
-    class StateAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return state.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return state[i];
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(final int i, View view, ViewGroup viewGroup) {
-            view = View.inflate(activity, R.layout.listview_state, null);
-            ImageButton ib_state = (ImageButton) view.findViewById(R.id.ib_state);
-            ib_state.setBackgroundResource(state[i]);
-            ib_state.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MicroTools.toast(activity, "" + i);
-                    //TODO: 此处设置状态 访问网络并修改状态
-                    b_select_state.setBackgroundResource(state[i]);//设置状态
-                    selectState.dismiss();//隐藏弹出窗口
-                }
-            });
-            return view;
-        }
     }
 }

@@ -92,7 +92,7 @@ public class DividiAdapter extends BaseAdapter {
                 if (switch2) {
                     switch2 = false;
                     BmobQuery<Contacts> bmobQuery = new BmobQuery<Contacts>();
-                    bmobQuery.include("Friend,Owner");
+                    bmobQuery.include("Friend.depart,Owner,Friend");
                     bmobQuery.addWhereEqualTo("Owner", user);
                     bmobQuery.findObjects(context, new FindListener<Contacts>() {
                         @Override

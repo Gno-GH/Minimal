@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="@drawable/left_bg">
+             android:background="#43536d">
 
     <LinearLayout
         android:layout_width="250dp"
@@ -45,16 +45,13 @@
                 android:layout_toRightOf="@id/iv_userimg"
                 android:textColor="#121212"
                 android:textSize="12dp"/>
-
-            <Button
-                android:id="@+id/b_select_state"
-                android:layout_width="45dp"
-                android:layout_height="24dp"
-                android:layout_alignBottom="@id/tv_number"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="15dp"
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/tv_number"
-                android:background="@drawable/onclass"/>
+                android:id="@+id/iv_user_level"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
         </RelativeLayout>
 
         <ImageView

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b"
+    android:background="#43536d"
     android:orientation="vertical"
     tools:context="minimal.microfriend.activity.LoginActivity">
 
@@ -13,7 +13,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="180dp"
         android:background="@drawable/editview_login"
         android:drawablePadding="5dp"
         android:hint="账  号"
@@ -31,7 +31,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/editview_login"
         android:drawablePadding="5dp"
         android:hint="密 码"
