@@ -146,6 +146,7 @@ public class TrendsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //TODO:帖子删除
+
                 MicroTools.toast(context, "删除");
             }
         });
