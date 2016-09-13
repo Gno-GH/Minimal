@@ -98,6 +98,7 @@ public class TrendsAdapter extends BaseAdapter {
             downAndSetImg(position, holder);
         }
         //设置适配器
+
         holder.adapter = new ReplyAdapter(this.context, allreplies.getReplys(trends.get(position)), ll_pop, user, trends.get(position));
         holder.context_lv.setAdapter(holder.adapter);
         holder.context_text.setText(trends.get(position).getContentText());
@@ -155,7 +156,6 @@ public class TrendsAdapter extends BaseAdapter {
         holder.del_ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:帖子删除
                 trends.get(position).delete(context, new DeleteListener() {
                     @Override
                     public void onSuccess() {

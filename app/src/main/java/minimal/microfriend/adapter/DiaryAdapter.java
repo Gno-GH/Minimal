@@ -103,7 +103,7 @@ public class DiaryAdapter extends BaseAdapter implements View.OnClickListener {
      * @param i
      */
     private void diaryDel(final int i) {
-        //TODO:日记本地删除
+        //TODO 删除本地日记
         mDiaries.get(i).delete(context, new DeleteListener() {
             @Override
             public void onSuccess() {

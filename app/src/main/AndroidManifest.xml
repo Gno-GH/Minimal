@@ -30,12 +30,11 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.LogonActivity"/>
-        <activity android:name=".activity.SelectSchoolActivity"/>
         <activity android:name=".activity.ClassActivity"/>
         <activity android:name=".activity.MeansActivity"/>
         <activity android:name=".activity.DiaryActivity"/>
         <activity android:name=".activity.OwnerTrendsActivity"/>
-        <activity android:name=".activity.ImgSelectActivity"/>
+        <activity android:name=".activity.SelectSchoolActivity"/>
         <!--
         <activity
             android:name=".activity.DialogActivity"

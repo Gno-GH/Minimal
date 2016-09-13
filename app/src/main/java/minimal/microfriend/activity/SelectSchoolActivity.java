@@ -137,7 +137,7 @@ public class SelectSchoolActivity extends BaseActivity{
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     user.setMajor(majors.get(i));
-                                    intent = new Intent(SelectSchoolActivity.this,minimal.microfriend.activity.LogonActivity.class);
+                                    intent = new Intent(SelectSchoolActivity.this,LogonActivity.class);
                                     intent.putExtra("user",user);
                                     SelectSchoolActivity.this.startActivity(intent);
                                     mojarWindow.dismiss();

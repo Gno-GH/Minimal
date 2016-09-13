@@ -14,7 +14,7 @@ public abstract class BaseFragment extends Fragment {
 	public abstract View iniView(LayoutInflater inflater);
 	public abstract void initData();
 	public abstract User initUser();
-	public User user;
+	public static User user;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -17,7 +17,7 @@ public class BaseTabPager{
     public LinearLayout ll_root;
     private View rootView;
     public TextView title_tv;
-    public User user;
+    public static User user;
     public boolean isaddview = true;
 
     public BaseTabPager(Context context) {

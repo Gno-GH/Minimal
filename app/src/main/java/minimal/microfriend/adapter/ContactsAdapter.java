@@ -78,7 +78,6 @@ public class ContactsAdapter extends BaseAdapter {
             }
         });
         if (model == 0) {
-            //TODO :好友信息设置 系院无法查询
             level = 17 - Integer.parseInt(schoolFriend.get(position).getUsername().substring(0, 2));
             hodler.tv_cname.setText(schoolFriend.get(position).getPetname());
             hodler.tv_cdepart.setText(schoolFriend.get(position).getDepart().getDname());
