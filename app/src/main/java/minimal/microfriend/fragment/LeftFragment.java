@@ -1,7 +1,10 @@
 package minimal.microfriend.fragment;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +17,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.Serializable;
+
+import cn.bmob.v3.listener.DownloadFileListener;
 import minimal.microfriend.R;
 import minimal.microfriend.activity.ClassActivity;
 import minimal.microfriend.activity.DiaryActivity;
@@ -22,16 +29,20 @@ import minimal.microfriend.activity.OwnerTrendsActivity;
 import minimal.microfriend.base.BaseFragment;
 import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.MicroTools;
+import minimal.microfriend.view.CircleImageView;
+import minimal.microfriend.view.CricularView;
 import minimal.microfriend.view.MinimalLayout;
 
-public class LeftFragment extends BaseFragment implements View.OnClickListener, View.OnTouchListener {
+public class LeftFragment extends BaseFragment implements View.OnClickListener, View.OnTouchListener,Serializable{
     private MinimalLayout minimalLayout;
-    private ImageView iv_userimg;
+    private CricularView iv_userimg;
     private TextView tv_petname, tv_number;
     private TextView tv_class, tv_diary, tv_interest, tv_join;
     private ImageView iv_class, iv_diary, iv_interest, iv_join,iv_user_level;
     private Intent mIntent;
     private int[] levelImg = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five};
+    private static File img;
+
     public LeftFragment(MinimalLayout minimalLayout){
         super();
         this.minimalLayout = minimalLayout;
@@ -42,7 +53,7 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
         //侧边栏view
         View view = inflater.inflate(R.layout.fragment_left, null);
         iv_user_level = (ImageView) view.findViewById(R.id.iv_user_level);
-        iv_userimg = (ImageView) view.findViewById(R.id.iv_userimg);
+        iv_userimg = (CricularView) view.findViewById(R.id.iv_userimg);
         tv_number = (TextView) view.findViewById(R.id.tv_number);
         tv_petname = (TextView) view.findViewById(R.id.tv_petname);
         iv_userimg.setOnClickListener(this);
@@ -67,7 +78,6 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
         iv_diary.setOnClickListener(this);
         return view;
     }
-
     @Override
     public void initData() {
         if (getArguments() != null) {
@@ -75,8 +85,30 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
             if (user.getPetname() != null)
                 tv_petname.setText(user.getPetname());
             tv_number.setText(user.getUsername());
+            if(user.getUserphoto()!=null&&img!=null)
+                iv_userimg.setImageBitmap(BitmapFactory.decodeFile(img.getPath()));
+            else{
+                downUserImg();
+            }
         }
         setLevel(17 - Integer.parseInt(user.getUsername().substring(0, 2)));
+    }
+
+    private void downUserImg() {
+        img = new File(activity.getCacheDir() + "/bmob/" +
+                user.getUserphoto().getFilename());
+        user.getUserphoto().download(activity, new DownloadFileListener() {
+            @Override
+            public void onSuccess(String s) {
+                Log.d("ABC",s);
+                iv_userimg.setImageBitmap(BitmapFactory.decodeFile(s));
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                MicroTools.toast(activity,s);
+            }
+        });
     }
 
     private void setLevel(int i) {
@@ -115,10 +147,10 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
     }
-    //TODO:检测资料是否完善
     private void myMeans() {
         mIntent = new Intent(activity, MeansActivity.class);
         mIntent.putExtra("user",user);
+        mIntent.putExtra("img",img);
         startActivity(mIntent);
     }
 

@@ -15,10 +15,12 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import java.io.Serializable;
+
 /**
  * Created by gno on 16/7/30.
  */
-public class CricularView extends ImageView {
+public class CricularView extends ImageView{
     private Paint mPaintBitmap = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Bitmap mRawBitmap;
     private BitmapShader mShader;

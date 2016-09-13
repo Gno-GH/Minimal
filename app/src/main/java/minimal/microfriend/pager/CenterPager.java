@@ -28,8 +28,8 @@ public class CenterPager extends BaseTabPager {
     private TrendsAdapter madapter;
     private int index = 0;
     private int postion = 0;
+    private static int page = 1;
     private boolean mQuerySuccess = false;
-
 
     public CenterPager(Context context, User user) {
         super(context);
@@ -46,6 +46,7 @@ public class CenterPager extends BaseTabPager {
             trend_rlv.setDividerHeight(0);
             trend_rlv.setOverScrollMode(View.OVER_SCROLL_NEVER);//去除阴影
             trend_rlv.setVerticalScrollBarEnabled(false);//隐藏滚动条
+            page = 1;
         }
         if (!mQuerySuccess)
             initTrends();
@@ -56,7 +57,7 @@ public class CenterPager extends BaseTabPager {
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
         queryTrend.include("createUser");
         queryTrend.order("-createdAt");
-        queryTrend.setLimit(10);
+        queryTrend.setLimit(10 * page);
         queryTrend.setSkip(0);
         queryTrend.findObjects(this.context, new FindListener<Trend>() {
             @Override
@@ -90,7 +91,7 @@ public class CenterPager extends BaseTabPager {
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(context, allreplies, user, ll_root,CenterPager.this,null,0);
+                        madapter = new TrendsAdapter(context, allreplies, user, ll_root, CenterPager.this, null, 0);
                         trend_rlv.setAdapter(madapter);
                         postion = 0;
                         linearLayout.addView(trend_rlv);
@@ -98,12 +99,13 @@ public class CenterPager extends BaseTabPager {
                             @Override
                             public void onReFrensh() {
                                 //查询数据
-                                replyRefrensh();
+                                replyRefrensh(0);
                             }
 
                             @Override
                             public void loadMore() {
-
+                                page++;
+                                replyRefrensh(1);
                             }
                         });
                         mQuerySuccess = true;
@@ -122,13 +124,17 @@ public class CenterPager extends BaseTabPager {
         });
     }
 
-    public void replyRefrensh() {
+
+    public void replyRefrensh(int model) {
         allreplies = new ListTable();
         mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
         queryTrend.include("createUser");
         queryTrend.order("-createdAt");
-        queryTrend.setLimit(10);
+        if (model == 0)
+            queryTrend.setLimit(10);
+        else
+            queryTrend.setLimit(10 * page);
         queryTrend.setSkip(0);
         queryTrend.findObjects(this.context, new FindListener<Trend>() {
             @Override
@@ -162,7 +168,7 @@ public class CenterPager extends BaseTabPager {
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(context, allreplies, user, ll_root,CenterPager.this,null,0);
+                        madapter = new TrendsAdapter(context, allreplies, user, ll_root, CenterPager.this, null, 0);
                         trend_rlv.setAdapter(madapter);
                         trend_rlv.onRefrenshComplete();
                         postion = 0;
@@ -184,6 +190,6 @@ public class CenterPager extends BaseTabPager {
 
     public void trendAdd(Trend trend) {
         allreplies.add(trend, new ArrayList<Reply>());
-        replyRefrensh();
+        replyRefrensh(0);
     }
 }

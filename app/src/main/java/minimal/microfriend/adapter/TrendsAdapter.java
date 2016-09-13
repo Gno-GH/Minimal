@@ -159,8 +159,8 @@ public class TrendsAdapter extends BaseAdapter {
                 trends.get(position).delete(context, new DeleteListener() {
                     @Override
                     public void onSuccess() {
-                        if(model == 0)centerPager.replyRefrensh();
-                        else activity.replyRefrensh();
+                        if(model == 0)centerPager.replyRefrensh(0);
+                        else activity.replyRefrensh(0);
                     }
 
                     @Override

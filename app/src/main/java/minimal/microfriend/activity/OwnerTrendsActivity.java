@@ -32,6 +32,7 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
     private int index = 0;
     private int postion = 0;
     private boolean mQuerySuccess = false;
+    private static int page = 1;
     private LinearLayout ll_root;
 
     @Override
@@ -80,7 +81,7 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
         queryTrend.order("-createdAt");
         queryTrend.setLimit(10);
         queryTrend.setSkip(0);
-        queryTrend.addWhereEqualTo("createUser",user);
+        queryTrend.addWhereEqualTo("createUser", user);
         queryTrend.findObjects(OwnerTrendsActivity.this, new FindListener<Trend>() {
             @Override
             public void onSuccess(List<Trend> list) {
@@ -113,19 +114,20 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root,null,OwnerTrendsActivity.this,1);
+                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root, null, OwnerTrendsActivity.this, 1);
                         rl_trends.setAdapter(madapter);
                         postion = 0;
                         rl_trends.setOnRefrenshListener(new RefrenshListView.OnRefrenshListener() {
                             @Override
                             public void onReFrensh() {
                                 //查询数据
-                                replyRefrensh();
+                                replyRefrensh(0);
                             }
 
                             @Override
                             public void loadMore() {
-
+                                page++;
+                                replyRefrensh(1);
                             }
                         });
                         mQuerySuccess = true;
@@ -144,15 +146,17 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    public void replyRefrensh() {
+    public void replyRefrensh(int model) {
         allreplies = new ListTable();
         mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
         queryTrend.include("createUser");
         queryTrend.order("-createdAt");
-        queryTrend.setLimit(10);
+        if (model == 0)
+            queryTrend.setLimit(10);
+        else queryTrend.setLimit(10 * page);
         queryTrend.setSkip(0);
-        queryTrend.addWhereEqualTo("createUser",user);
+        queryTrend.addWhereEqualTo("createUser", user);
         queryTrend.findObjects(OwnerTrendsActivity.this, new FindListener<Trend>() {
             @Override
             public void onSuccess(List<Trend> list) {
@@ -185,7 +189,7 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root,null,OwnerTrendsActivity.this,1);
+                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root, null, OwnerTrendsActivity.this, 1);
                         rl_trends.setAdapter(madapter);
                         rl_trends.onRefrenshComplete();
                         postion = 0;

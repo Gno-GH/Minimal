@@ -22,6 +22,7 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import minimal.microfriend.R;
 import minimal.microfriend.base.BaseActivity;
+import minimal.microfriend.fragment.LeftFragment;
 import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.CricularView;
 
@@ -38,6 +39,7 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
     private String[] mStrings = {"看电视", "玩手机", "游泳", "玩游戏", "听歌"};
     private Button b_means_close, b_means_edit;
     private static File img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,9 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void initData() {
         user = (minimal.microfriend.entry.User) getIntent().getSerializableExtra("user");
-        if(user.getUserphoto()!=null&&img!=null)
+        if (img == null)
+            img = (File) getIntent().getSerializableExtra("img");
+        if (user.getUserphoto() != null && img != null)
             cv_userimg.setImageBitmap(BitmapFactory.decodeFile(img.getPath()));
     }
 
