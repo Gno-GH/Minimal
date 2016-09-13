@@ -25,6 +25,7 @@ import minimal.microfriend.entry.Diary;
 import minimal.microfriend.utils.MicroTools;
 
 /**
+ * 日记适配器
  * Created by gno on 16/8/6.
  */
 public class DiaryAdapter extends BaseAdapter implements View.OnClickListener {

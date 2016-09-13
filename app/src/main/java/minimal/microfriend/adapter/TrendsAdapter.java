@@ -26,15 +26,20 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import minimal.microfriend.R;
+import minimal.microfriend.activity.OwnerTrendsActivity;
 import minimal.microfriend.entry.Interaction;
 import minimal.microfriend.entry.Reply;
 import minimal.microfriend.entry.Trend;
 import minimal.microfriend.entry.User;
+import minimal.microfriend.pager.CenterPager;
 import minimal.microfriend.utils.ListTable;
 import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.AutoListView;
 import minimal.microfriend.view.CricularView;
 
+/**
+ * 动态列表适配器
+ */
 public class TrendsAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Trend> trends;
@@ -44,12 +49,17 @@ public class TrendsAdapter extends BaseAdapter {
     private View popView;
     private LinearLayout ll_pop;
     private Reply reply;
-
-    public TrendsAdapter(Context context, ListTable allreplies, User user, LinearLayout ll_pop) {
+    private CenterPager centerPager;
+    private OwnerTrendsActivity activity;
+    private int model ;
+    public TrendsAdapter(Context context, ListTable allreplies, User user, LinearLayout ll_pop,CenterPager centerPager,OwnerTrendsActivity activity,int model) {
         this.context = context;
         this.allreplies = allreplies;
         this.user = user;
         this.ll_pop = ll_pop;
+        this.centerPager = centerPager;
+        this.activity = activity;
+        this.model = model;
         trends = new ArrayList<Trend>();
         for (Trend o : allreplies.keys) {
             trends.add((Trend) o);
@@ -146,8 +156,18 @@ public class TrendsAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //TODO:帖子删除
+                trends.get(position).delete(context, new DeleteListener() {
+                    @Override
+                    public void onSuccess() {
+                        if(model == 0)centerPager.replyRefrensh();
+                        else activity.replyRefrensh();
+                    }
 
-                MicroTools.toast(context, "删除");
+                    @Override
+                    public void onFailure(int i, String s) {
+                        MicroTools.toast(context,"删除失败"+s);
+                    }
+                });
             }
         });
         //评论

@@ -3,19 +3,22 @@
               android:id="@+id/ll_root"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#fff"
+              android:background="#43536d"
               android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
 
         <Button
             android:id="@+id/b_close"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/b_return"
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,10 +34,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#adadad"
+        android:background="#fff"
         ></View>
 
     <minimal.microfriend.view.RefrenshListView
+        android:background="#fff"
         android:id="@+id/rl_trends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

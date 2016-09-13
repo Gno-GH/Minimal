@@ -19,6 +19,7 @@ import minimal.microfriend.utils.MicroTools;
 import minimal.microfriend.view.AutoListView;
 
 /**
+ * 联系人分组适配器
  * Created by gno on 16/9/10.
  */
 public class DividiAdapter extends BaseAdapter {

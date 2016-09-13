@@ -12,6 +12,7 @@ import minimal.microfriend.R;
 import minimal.microfriend.entry.Major;
 
 /**
+ * 专业选择适配器
  * Created by gno on 16/7/18.
  */
 public class MajorAdapter extends BaseAdapter{

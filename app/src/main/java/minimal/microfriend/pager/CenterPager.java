@@ -90,7 +90,7 @@ public class CenterPager extends BaseTabPager {
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(context, allreplies, user, ll_root);
+                        madapter = new TrendsAdapter(context, allreplies, user, ll_root,CenterPager.this,null,0);
                         trend_rlv.setAdapter(madapter);
                         postion = 0;
                         linearLayout.addView(trend_rlv);
@@ -122,7 +122,7 @@ public class CenterPager extends BaseTabPager {
         });
     }
 
-    private void replyRefrensh() {
+    public void replyRefrensh() {
         allreplies = new ListTable();
         mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
@@ -162,7 +162,7 @@ public class CenterPager extends BaseTabPager {
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(context, allreplies, user, ll_root);
+                        madapter = new TrendsAdapter(context, allreplies, user, ll_root,CenterPager.this,null,0);
                         trend_rlv.setAdapter(madapter);
                         trend_rlv.onRefrenshComplete();
                         postion = 0;

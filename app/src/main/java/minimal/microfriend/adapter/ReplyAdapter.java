@@ -22,6 +22,9 @@ import minimal.microfriend.entry.Trend;
 import minimal.microfriend.entry.User;
 import minimal.microfriend.utils.MicroTools;
 
+/**
+ * 回复列表适配器
+ */
 public class ReplyAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Reply> replies;

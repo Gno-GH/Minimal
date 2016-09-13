@@ -113,7 +113,7 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root);
+                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root,null,OwnerTrendsActivity.this,1);
                         rl_trends.setAdapter(madapter);
                         postion = 0;
                         rl_trends.setOnRefrenshListener(new RefrenshListView.OnRefrenshListener() {
@@ -144,7 +144,7 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    private void replyRefrensh() {
+    public void replyRefrensh() {
         allreplies = new ListTable();
         mTrends = new ArrayList<Trend>();
         BmobQuery<Trend> queryTrend = new BmobQuery<Trend>();//查询
@@ -185,7 +185,7 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
                     replies = (ArrayList<Reply>) list;
                     allreplies.add(mTrends.get(postion), replies);
                     if (postion == index) {
-                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root);
+                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root,null,OwnerTrendsActivity.this,1);
                         rl_trends.setAdapter(madapter);
                         rl_trends.onRefrenshComplete();
                         postion = 0;

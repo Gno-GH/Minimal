@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+/**
+ * 引导pager适配器
+ */
 public class WelcomePagerAdapter extends PagerAdapter {
 	private ArrayList<ImageView> views;
 

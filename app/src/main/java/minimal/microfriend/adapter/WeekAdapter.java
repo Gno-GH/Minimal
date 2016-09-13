@@ -23,6 +23,7 @@ import minimal.microfriend.entry.OwnerClass;
 import minimal.microfriend.utils.MicroTools;
 
 /**
+ * 课表适配器
  * Created by gno on 16/8/3.
  */
 public class WeekAdapter extends BaseAdapter implements View.OnClickListener {
