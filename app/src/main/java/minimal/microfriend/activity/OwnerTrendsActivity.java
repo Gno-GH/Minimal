@@ -101,49 +101,51 @@ public class OwnerTrendsActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void queryReply() {
-        final BmobQuery<Reply> queryReply = new BmobQuery<Reply>();
-        queryReply.include("trend");
-        queryReply.include("receiver,observer");
-        queryReply.order("createdAt");
-        queryReply.addWhereEqualTo("trend", mTrends.get(postion));
-        queryReply.findObjects(OwnerTrendsActivity.this, new FindListener<Reply>() {
-            @Override
-            public void onSuccess(List<Reply> list) {
-                if (postion < index + 1) {
-                    replies = new ArrayList<Reply>();
-                    replies = (ArrayList<Reply>) list;
-                    allreplies.add(mTrends.get(postion), replies);
-                    if (postion == index) {
-                        madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root, null, OwnerTrendsActivity.this, 1);
-                        rl_trends.setAdapter(madapter);
-                        postion = 0;
-                        rl_trends.setOnRefrenshListener(new RefrenshListView.OnRefrenshListener() {
-                            @Override
-                            public void onReFrensh() {
-                                //查询数据
-                                replyRefrensh(0);
-                            }
+        if(mTrends.size()!=0) {
+            final BmobQuery<Reply> queryReply = new BmobQuery<Reply>();
+            queryReply.include("trend");
+            queryReply.include("receiver,observer");
+            queryReply.order("createdAt");
+            queryReply.addWhereEqualTo("trend", mTrends.get(postion));
+            queryReply.findObjects(OwnerTrendsActivity.this, new FindListener<Reply>() {
+                @Override
+                public void onSuccess(List<Reply> list) {
+                    if (postion < index + 1) {
+                        replies = new ArrayList<Reply>();
+                        replies = (ArrayList<Reply>) list;
+                        allreplies.add(mTrends.get(postion), replies);
+                        if (postion == index) {
+                            madapter = new TrendsAdapter(OwnerTrendsActivity.this, allreplies, user, ll_root, null, OwnerTrendsActivity.this, 1);
+                            rl_trends.setAdapter(madapter);
+                            postion = 0;
+                            rl_trends.setOnRefrenshListener(new RefrenshListView.OnRefrenshListener() {
+                                @Override
+                                public void onReFrensh() {
+                                    //查询数据
+                                    replyRefrensh(0);
+                                }
 
-                            @Override
-                            public void loadMore() {
-                                page++;
-                                replyRefrensh(1);
-                            }
-                        });
-                        mQuerySuccess = true;
-                        return;
+                                @Override
+                                public void loadMore() {
+                                    page++;
+                                    replyRefrensh(1);
+                                }
+                            });
+                            mQuerySuccess = true;
+                            return;
+                        }
+                        postion++;
+                        queryReply();
                     }
-                    postion++;
-                    queryReply();
                 }
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                mQuerySuccess = false;
-                MicroTools.toast(OwnerTrendsActivity.this, "查询失败" + i);
-            }
-        });
+                @Override
+                public void onError(int i, String s) {
+                    mQuerySuccess = false;
+                    MicroTools.toast(OwnerTrendsActivity.this, "查询失败" + i);
+                }
+            });
+        }
     }
 
     public void replyRefrensh(int model) {

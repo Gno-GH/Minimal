@@ -199,7 +199,7 @@ public class TrendsAdapter extends BaseAdapter {
                         reply.setTrend(trends.get(position));
                         reply.save(context, new SaveListener() {
                             @Override
-                            public void onSuccess() {
+                            public void onSuccess() {  
                                 allreplies.values.get(position).add(reply);
                                 mComment.dismiss();
                                 holder.adapter.notifyDataSetChanged();

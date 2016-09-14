@@ -75,26 +75,47 @@ public class ClassActivity extends BaseActivity implements View.OnClickListener 
             public void onSuccess(List<StuClass> list) {
                 if (list.size() == 0) {
                     //TODO:服务器中不存在课程表 提示用户手动添加
-                } else {
-                    //下载json文件
-                    list.get(0).getClassJson().download(ClassActivity.this, new DownloadFileListener() {
+                    BmobQuery<StuClass> Query = new BmobQuery<StuClass>();
+                    Query.include("major");
+                    Query.include("classJson");
+                    Query.addWhereEqualTo("level", 9);
+                    Query.findObjects(ClassActivity.this, new FindListener<StuClass>() {
                         @Override
-                        public void onSuccess(String s) {
-                            MicroTools.fileCopy(new File(s), classFile);
-                            //解析本地课表json
-                            classFileAnalysis(MicroTools.fileToString(classFile));
+                        public void onSuccess(List<StuClass> list) {
+                            downLoadClass(list,classFile);
                         }
 
                         @Override
-                        public void onFailure(int i, String s) {
+                        public void onError(int i, String s) {
                             MicroTools.toast(ClassActivity.this, "网络似乎有点问题!");
                         }
                     });
+                    MicroTools.toast(ClassActivity.this,"暂无课表");
+                } else {
+                    downLoadClass(list, classFile);
+
                 }
             }
 
             @Override
             public void onError(int i, String s) {
+                MicroTools.toast(ClassActivity.this, "网络似乎有点问题!");
+            }
+        });
+    }
+
+    private void downLoadClass(List<StuClass> list, final File classFile) {
+        //下载json文件
+        list.get(0).getClassJson().download(ClassActivity.this, new DownloadFileListener() {
+            @Override
+            public void onSuccess(String s) {
+                MicroTools.fileCopy(new File(s), classFile);
+                //解析本地课表json
+                classFileAnalysis(MicroTools.fileToString(classFile));
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
                 MicroTools.toast(ClassActivity.this, "网络似乎有点问题!");
             }
         });
