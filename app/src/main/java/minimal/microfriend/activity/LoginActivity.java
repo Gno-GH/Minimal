@@ -63,9 +63,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess() {
                         BmobQuery<minimal.microfriend.entry.User> userquery = new BmobQuery<User>();
-                        userquery.include("major");
-                        userquery.include("depart");
-                        userquery.include("school");
+                        userquery.include("major,depart,school");
                         userquery.addWhereEqualTo("username",usernumber);
                         userquery.findObjects(LoginActivity.this, new FindListener<minimal.microfriend.entry.User>() {
                             @Override

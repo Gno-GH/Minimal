@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="320dp"
-              android:layout_margin="0dp"
-              android:background="#eaea00"
-              android:orientation="vertical"
-              android:padding="0dp">
+    android:layout_width="fill_parent"
+    android:layout_height="320dp"
+    android:layout_margin="0dp"
+    android:background="#43536d"
+    android:orientation="vertical"
+    android:padding="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="0dp"
         android:layout_height="55dp"
-        android:paddingRight="15dp"
+        android:layout_margin="0dp"
         android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:paddingTop="15dp">
 
         <Button
             android:id="@+id/b_trend_close"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:background="@drawable/b_return" />
 
         <Button
             android:id="@+id/b_trend_ok"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:background="@drawable/b_send" />
     </RelativeLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#adadad"
-        ></View>
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="5dp"
+        android:background="#fff"></View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -52,9 +53,10 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="#ea00ea"/>
+            android:background="@drawable/select_img" />
 
         <EditText
+            android:background="@drawable/editview_login"
             android:id="@+id/et_trend_content"
             android:layout_width="0dp"
             android:layout_height="200dp"
@@ -63,6 +65,6 @@
             android:layout_weight="2"
             android:gravity="left|top"
             android:inputType="textMultiLine"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

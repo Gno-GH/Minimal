@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.Serializable;
 
 import cn.bmob.v3.listener.DownloadFileListener;
+import cn.bmob.v3.listener.UpdateListener;
 import minimal.microfriend.R;
 import minimal.microfriend.activity.ClassActivity;
 import minimal.microfriend.activity.DiaryActivity;
@@ -80,18 +82,37 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
     }
     @Override
     public void initData() {
-        if (getArguments() != null) {
-            user = (User) getArguments().getSerializable("user");
-            if (user.getPetname() != null)
-                tv_petname.setText(user.getPetname());
-            tv_number.setText(user.getUsername());
-            if(user.getUserphoto()!=null&&img!=null)
-                iv_userimg.setImageBitmap(BitmapFactory.decodeFile(img.getPath()));
-            else{
-                downUserImg();
+        userUpdate();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void userUpdate() {
+        user.update(activity, new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                if (getArguments() != null) {
+                    user = (User) getArguments().getSerializable("user");
+                    if (user.getPetname() != null)
+                        tv_petname.setText(user.getPetname());
+                    tv_number.setText(user.getUsername());
+                    if(user.getUserphoto()!=null&&img!=null)
+                        iv_userimg.setImageBitmap(BitmapFactory.decodeFile(img.getPath()));
+                    else{
+                        downUserImg();
+                    }
+                }
+                setLevel(17 - Integer.parseInt(user.getUsername().substring(0, 2)));
             }
-        }
-        setLevel(17 - Integer.parseInt(user.getUsername().substring(0, 2)));
+
+            @Override
+            public void onFailure(int i, String s) {
+                MicroTools.toast(activity,s);
+            }
+        });
     }
 
     private void downUserImg() {
@@ -162,7 +183,7 @@ public class LeftFragment extends BaseFragment implements View.OnClickListener, 
 
     //TODO: 用户兴趣爱好
     private void myInterest() {
-        MicroTools.toast(activity, "INTEREST");
+        MicroTools.toast(activity, "敬请期待...");
     }
 
     private void myJoin() {

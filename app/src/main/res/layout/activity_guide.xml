@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_welcome"
@@ -19,15 +18,19 @@
         android:orientation="horizontal" >
     </LinearLayout>
 
-    <Button
+    <TextView
         android:onClick="learn"
         android:id="@+id/b_learn"
-        android:layout_width="80dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/layout_change"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/start"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="23sp"
+        android:text="Welcome"
+        android:singleLine="true"
         android:visibility="gone"
         />
 

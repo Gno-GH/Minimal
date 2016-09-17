@@ -33,7 +33,7 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
     //TODO: 个人资料修改待完善
     private GridView gd_mood;
     private CricularView cv_userimg;
-    private TextView tv_age, tv_depart;
+    private TextView tv_depart, tv_name;
     private ImageView tv_sex;
     private MoodAdapter mMoodAdapter;
     private String[] mStrings = {"看电视", "玩手机", "游泳", "玩游戏", "听歌"};
@@ -61,8 +61,8 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
         gd_mood.setAdapter(mMoodAdapter);
         cv_userimg = (CricularView) findViewById(R.id.cv_userimg);
         cv_userimg.setOnClickListener(this);
-        tv_age = (TextView) findViewById(R.id.tv_age);
         tv_depart = (TextView) findViewById(R.id.tv_depart);
+        tv_name = (TextView) findViewById(R.id.tv_name);
         tv_sex = (ImageView) findViewById(R.id.tv_sex);
         b_means_close = (Button) findViewById(R.id.b_means_close);
         b_means_edit = (Button) findViewById(R.id.b_means_edit);
@@ -77,6 +77,10 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
             img = (File) getIntent().getSerializableExtra("img");
         if (user.getUserphoto() != null && img != null)
             cv_userimg.setImageBitmap(BitmapFactory.decodeFile(img.getPath()));
+        tv_depart.setText(user.getDepart().getDname());
+        tv_name.setText(user.getPetname());
+        Log.d("ABC",user.getDepart().getDname());
+        if (user.getSex().equals("女")) tv_sex.setBackgroundResource(R.drawable.girl_select);
     }
 
     @Override
@@ -86,6 +90,7 @@ public class MeansActivity extends BaseActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.b_means_edit:
+
                 break;
             case R.id.cv_userimg:
                 Intent intent = new Intent(Intent.ACTION_PICK);

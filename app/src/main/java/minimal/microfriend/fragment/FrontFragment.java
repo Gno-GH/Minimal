@@ -210,7 +210,7 @@ public class FrontFragment extends BaseFragment implements RadioGroup.OnCheckedC
                     mTrend.setDislike(0);
                     mTrend.setLike(0);
                     mTrend.setCreateUser(user);
-                    popTrendIss.showAtLocation(front_vp, Gravity.BOTTOM, 0, 0);
+                    popTrendIss.showAtLocation(front_vp, Gravity.TOP, 0, 0);
                 }
                 break;
         }

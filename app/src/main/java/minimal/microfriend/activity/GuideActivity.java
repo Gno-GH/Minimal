@@ -9,6 +9,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import minimal.microfriend.utils.SharePrefences;
 public class GuideActivity extends BaseActivity {
     private ViewPager vp_welcome;
     private LinearLayout layout_change;
-    private Button b_learn;
+    private TextView b_learn;
     private ArrayList<ImageView> views;
     private int last;
 	private final int[] imageIds = { R.drawable.guide_1,
@@ -37,7 +38,7 @@ public class GuideActivity extends BaseActivity {
     public void initView() {
         vp_welcome = (ViewPager) findViewById(R.id.vp_welcome);
         layout_change = (LinearLayout) findViewById(R.id.layout_change);
-        b_learn = (Button) findViewById(R.id.b_learn);
+        b_learn = (TextView) findViewById(R.id.b_learn);
         vp_welcome.setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
 

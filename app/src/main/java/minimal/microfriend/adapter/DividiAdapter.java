@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
 import minimal.microfriend.R;
 import minimal.microfriend.entry.Contacts;
@@ -93,7 +94,7 @@ public class DividiAdapter extends BaseAdapter {
                 if (switch2) {
                     switch2 = false;
                     BmobQuery<Contacts> bmobQuery = new BmobQuery<Contacts>();
-                    bmobQuery.include("Friend.depart,Owner,Friend");
+                    bmobQuery.include("Friend.depart,Owner,Friend.userphoto,Friend");
                     bmobQuery.addWhereEqualTo("Owner", user);
                     bmobQuery.findObjects(context, new FindListener<Contacts>() {
                         @Override

@@ -57,10 +57,7 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void onSuccess() {
                 BmobQuery<User> userquery = new BmobQuery<User>();
-                userquery.include("major");
-                userquery.include("depart");
-                userquery.include("school");
-				userquery.include("petname");
+                userquery.include("major,depart,school,petname");
                 userquery.addWhereEqualTo("username",usernumber);
                 userquery.findObjects(WelcomeActivity.this, new FindListener<User>() {
                     @Override

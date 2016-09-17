@@ -1,6 +1,7 @@
 package minimal.microfriend.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,7 @@ public class ContactsAdapter extends BaseAdapter {
             level = 17 - Integer.parseInt(schoolFriend.get(position).getUsername().substring(0, 2));
             hodler.tv_cname.setText(schoolFriend.get(position).getPetname());
             hodler.tv_cdepart.setText(schoolFriend.get(position).getDepart().getDname());
+            hodler.cv_img.setImageBitmap(BitmapFactory.decodeFile(context.getCacheDir() + "/bmob/" +schoolFriend.get(position).getUserphoto().getFilename()));
             if (schoolFriend.get(position).getSex().equals("男"))
                 hodler.iv_sex.setBackgroundResource(sexImg[0]);
             else hodler.iv_sex.setBackgroundResource(sexImg[1]);
@@ -88,7 +90,7 @@ public class ContactsAdapter extends BaseAdapter {
             level = 17 - Integer.parseInt(ownerFriend.get(position).getFriend().getUsername().substring(0, 2));
             hodler.tv_cname.setText(ownerFriend.get(position).getFriend().getPetname());
             hodler.tv_cdepart.setText(ownerFriend.get(position).getFriend().getDepart().getDname());
-            Log.d("ABC",ownerFriend.get(position).getFriend().getDepart().getDname());
+            hodler.cv_img.setImageBitmap(BitmapFactory.decodeFile(context.getCacheDir() + "/bmob/" +ownerFriend.get(position).getFriend().getUserphoto().getFilename()));
             if (ownerFriend.get(position).getFriend().getSex().equals("男"))
                 hodler.iv_sex.setBackgroundResource(sexImg[0]);
             else hodler.iv_sex.setBackgroundResource(sexImg[1]);
